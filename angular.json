@@ -7,7 +7,7 @@
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
-          "style": "scss",
+          "style": "node_modules/bootstrap/scss/bootstrap.scss",
           "standalone": false
         },
         "@schematics/angular:directive": {
