@@ -7,8 +7,9 @@
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
-          "style": "node_modules/bootstrap/scss/bootstrap.scss",
-          "standalone": false
+          "style": "scss",
+          "standalone": false,
+          "skipTests": true
         },
         "@schematics/angular:directive": {
           "standalone": false
@@ -37,7 +38,8 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "node_modules/bootstrap/scss/bootstrap.scss"
             ],
             "scripts": []
           },

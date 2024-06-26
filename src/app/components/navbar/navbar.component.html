@@ -1,0 +1,33 @@
+<nav class="navbar navbar-expand-sm bg-body-tertiary rounded" aria-label="Thirteenth navbar example">
+  <div class="container-fluid">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample11" aria-controls="navbarsExample11" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse d-lg-flex" id="navbarsExample11">
+      <a class="navbar-brand col-lg-3 me-0" routerLink="/">Flavor-Hub</a>
+      <ul class="navbar-nav col-lg-6 justify-content-lg-center">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" routerLink="/">Home</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" routerLink="/" (click)="show = !show"
+          data-bs-toggle="dropdown" aria-expanded="false">Ricette Salutari</a>
+          <ul class="dropdown-menu" [ngClass]="{show}">
+            <li><a class="dropdown-item" routerLink="/">Vegan</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" routerLink="/">Vegetarian</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" routerLink="/">Gluten Free</a></li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/">Le Mie Ricette</a>
+        </li>
+      </ul>
+      <div class="d-lg-flex col-lg-3 justify-content-lg-end">
+        <a class="btn btn-danger" routerLink="/user/register">Register</a>
+        <a class="btn btn-primary" routerLink="/user/login">Login</a>
+      </div>
+    </div>
+  </div>
+</nav>
