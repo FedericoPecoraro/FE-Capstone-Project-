@@ -13,20 +13,20 @@
           <a class="nav-link dropdown-toggle" routerLink="/" (click)="show = !show"
           data-bs-toggle="dropdown" aria-expanded="false">Ricette Salutari</a>
           <ul class="dropdown-menu" [ngClass]="{show}">
-            <li><a class="dropdown-item" routerLink="/">Vegan</a></li>
+            <li><a class="dropdown-item" routerLink="/recipe/vegan">Vegan</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" routerLink="/">Vegetarian</a></li>
+            <li><a class="dropdown-item" routerLink="/recipe/vegetarian">Vegetarian</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" routerLink="/">Gluten Free</a></li>
+            <li><a class="dropdown-item" routerLink="/recipe/gluten-free">Gluten Free</a></li>
           </ul>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/">Le Mie Ricette</a>
+          <a class="nav-link" routerLink="/recipe/user" *ngIf="isUserLoggedIn">Le Mie Ricette</a>
         </li>
       </ul>
       <div class="d-lg-flex col-lg-3 justify-content-lg-end">
-        <a class="btn btn-danger" routerLink="/user/register">Register</a>
-        <a class="btn btn-primary" routerLink="/user/login">Login</a>
+        <a class="btn btn-danger" routerLink="/user/register" *ngIf="!isUserLoggedIn">Register</a>
+        <a class="btn btn-primary" routerLink="/user/login" *ngIf="!isUserLoggedIn">Login</a>
       </div>
     </div>
   </div>

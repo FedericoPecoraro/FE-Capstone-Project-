@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { UserService } from '../../user/user.service';
 
 @Component({
   selector: 'app-navbar',
@@ -7,4 +8,20 @@ import { Component } from '@angular/core';
 })
 export class NavbarComponent {
 show:boolean = false
+isMenuCollapsed = true;
+isUserLoggedIn: boolean = false;
+isAdmin: boolean = false
+
+constructor(private authSvc: UserService) { }
+
+ngOnInit() {
+  this.authSvc.isLoggedIn$.subscribe(data => {
+    this.isUserLoggedIn = data;
+    this.isAdmin = this.authSvc.isAdmin
+  })
+}
+
+logout() {
+  this.authSvc.logout()
+}
 }
