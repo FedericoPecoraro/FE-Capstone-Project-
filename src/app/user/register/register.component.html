@@ -1,57 +1,42 @@
-
 <div class="main-container">
   <div class="container">
-    <div class="form_area p-5">
-      <p class="title">SIGN UP</p>
-      <form>
-        <div class="form_group">
-          <label class="sub_title" for="firstName">Nome</label>
-          <input
-            name="firstName"
-            placeholder="Inserisci il tuo nome"
-            class="form_style"
-            type="text"
-            [(ngModel)]="registerData.firstName"
-          />
-        </div>
-        <div class="form_group">
-          <label class="sub_title" for="lastName">Cognome</label>
-          <input
-            name="lastName"
-            placeholder="Inserisci la tua password"
-            class="form_style"
-            type="text"
-            [(ngModel)]="registerData.lastName"
-          />
-        </div>
-        <div class="form_group">
-          <label class="sub_title" for="mail">Mail</label>
-          <input
-            name="mail"
-            placeholder="Inserisci la tua mail"
-            class="form_style"
-            type="email"
-            [(ngModel)]="registerData.email"
-          />
-        </div>
-        <div class="form_group">
-          <label class="sub_title" for="password">Password</label>
-          <input
-          name="password"
-            placeholder="Inserisci la tua password"
-            class="form_style"
-            type="password"
-            [(ngModel)]="registerData.password"
-          />
-        </div>
-        <div>
-          <button (click)="signUp()" class="btn">REGISTRATI</button>
-          <p>
-            Hai già un account?
-            <a class="link" routerLink="/user/login">Accedi qui</a>
-          </p>
-        </div>
-      </form>
-    </div>
+    <form class="form">
+      <p class="title">Registrati</p>
+      <p class="message">Entra a far parte di Flavor Hub!</p>
+      <div class="flex">
+        <label>
+          <input class="input" type="text" name="firstName" [(ngModel)]="registerData.firstName" required="">
+          <span for="firstName">Nome</span>
+        </label>
+
+        <label>
+          <input class="input" type="text" name="lastName" [(ngModel)]="registerData.lastName" required="">
+          <span for="lastName">Cognome</span>
+        </label>
+      </div>
+
+      <label>
+        <input class="input" type="text" name="userame" [(ngModel)]="registerData.username" required="">
+        <span for="username">Username</span>
+      </label>
+
+      <label>
+        <input class="input" type="email" name="mail" [(ngModel)]="registerData.email" required="">
+        <span for="mail">Email</span>
+      </label>
+
+      <label>
+        <input class="input" type="password" name="password
+        [(ngModel)]=" registerData.password required="">
+        <span for="password">Password</span>
+      </label>
+      <label>
+        <input class="input" type="password" name="password
+        [(ngModel)]=" registerData.password required="">
+        <span for="password">Conferma password</span>
+      </label>
+      <button (click)="signUp()" class="submit">Invia</button>
+      <p class="signin">Hai già un account? <a routerLink="/user/login">Accedi!</a> </p>
+    </form>
   </div>
 </div>
