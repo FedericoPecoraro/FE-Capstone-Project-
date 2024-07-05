@@ -5,38 +5,33 @@
       <p class="message">Entra a far parte di Flavor Hub!</p>
       <div class="flex">
         <label>
-          <input class="input" type="text" name="firstName" [(ngModel)]="registerData.firstName" required="">
+          <input class="input" type="text" name="firstName" [(ngModel)]="registerData.firstName" required>
           <span for="firstName">Nome</span>
         </label>
 
         <label>
-          <input class="input" type="text" name="lastName" [(ngModel)]="registerData.lastName" required="">
+          <input class="input" type="text" name="lastName" [(ngModel)]="registerData.lastName" required>
           <span for="lastName">Cognome</span>
         </label>
       </div>
 
       <label>
-        <input class="input" type="text" name="userame" [(ngModel)]="registerData.username" required="">
+        <input class="input" type="text" name="username" [(ngModel)]="registerData.username" required>
         <span for="username">Username</span>
       </label>
 
       <label>
-        <input class="input" type="email" name="mail" [(ngModel)]="registerData.email" required="">
+        <input class="input" type="email" name="mail" [(ngModel)]="registerData.email" required>
         <span for="mail">Email</span>
       </label>
 
       <label>
-        <input class="input" type="password" name="password
-        [(ngModel)]=" registerData.password required="">
+        <input class="input" type="password" name="password" [(ngModel)]="registerData.password" required>
         <span for="password">Password</span>
       </label>
-      <label>
-        <input class="input" type="password" name="password
-        [(ngModel)]=" registerData.password required="">
-        <span for="password">Conferma password</span>
-      </label>
+
       <button (click)="signUp()" class="submit">Invia</button>
-      <p class="signin">Hai già un account? <a routerLink="/user/login">Accedi!</a> </p>
+      <p class="signin">Hai già un account? <a routerLink="/user/login">Accedi!</a></p>
     </form>
   </div>
 </div>

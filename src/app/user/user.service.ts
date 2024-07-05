@@ -84,7 +84,9 @@ export class UserService {
   }
 
   autoLogout(jwt: string) {
-    const expDate = this.jwtHelper.getTokenExpirationDate(jwt) as Date;
+    const expDate = this.jwtHelper.getTokenExpirationDate(jwt);
+    if (!expDate) return; // Se la data di scadenza è null, non fare nulla
+
     const expMs = expDate.getTime() - new Date().getTime();
 
     setTimeout(() => {

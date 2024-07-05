@@ -9,17 +9,17 @@ import { Router } from '@angular/router';
   styleUrl: './register.component.scss'
 })
 export class RegisterComponent {
-  registerData:Partial<iUser> = {}
+  registerData: Partial<iUser> = {}
 
   constructor(
-    private authSvc:UserService,
-    private router:Router
-    ){}
+    private authSvc: UserService,
+    private router: Router
+  ) { }
 
-  signUp(){
+  signUp() {
     this.authSvc.register(this.registerData)
-    .subscribe(data => {
-      this.router.navigate([''])
-    })
+      .subscribe(data => {
+        this.router.navigate(['user/login'])
+      })
   }
 }

@@ -5,17 +5,17 @@
       <p class="message">Accedi alla piattaforma ed esplora i contenuti!</p>
 
       <label>
-        <input class="input" type="text" name="userame" [(ngModel)]="loginData.username" required="">
+        <input class="input" type="text" name="username" [(ngModel)]="loginData.username" required>
         <span for="username">Username</span>
       </label>
 
       <label>
-        <input class="input" type="password" name="password
-        [(ngModel)]=" loginData.password required="">
+        <input class="input" type="password" name="password" [(ngModel)]="loginData.password" required>
         <span for="password">Password</span>
       </label>
+
       <button (click)="signIn()" class="submit">Accedi</button>
-      <p class="signin">Non hai un account? <a routerLink="/user/register">Registrati!</a> </p>
+      <p class="signin">Non hai un account? <a routerLink="/user/register">Registrati!</a></p>
     </form>
   </div>
 </div>

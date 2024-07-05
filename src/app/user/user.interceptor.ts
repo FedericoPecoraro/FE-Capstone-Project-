@@ -11,17 +11,19 @@ import { UserService } from './user.service';
 @Injectable()
 export class UserInterceptor implements HttpInterceptor {
 
-  constructor(private authSvc:UserService) {}
+  constructor(private authSvc: UserService) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
+    const accessToken = this.authSvc.getAccessToken();
 
-    const accessToken = this.authSvc.getAccessToken()
+    if (accessToken) {
+      request = request.clone({
+        setHeaders: {
+          Authorization: `Bearer ${accessToken}`
+        }
+      });
+    }
 
-    const newRequest = request.clone({
-      headers: request.headers.append('Authorization', 'Bearer ' + accessToken)
-    })
-
-    return next.handle(newRequest);
-
+    return next.handle(request);
   }
 }

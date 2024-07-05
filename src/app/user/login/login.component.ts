@@ -6,20 +6,26 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrl: './login.component.scss'
+  styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
-  loginData: LoginData = {username: '', password: ''}
+  loginData: LoginData = { username: '', password: '' };
 
   constructor(
-    private authSvc:UserService,
-    private router:Router
-    ){}
+    private authSvc: UserService,
+    private router: Router
+  ) {}
 
-    signIn(){
-      this.authSvc.login(this.loginData)
-      .subscribe(data => {
-        this.router.navigate([''])
-      })
-    }
+  signIn() {
+    this.authSvc.login(this.loginData)
+      .subscribe({
+        next: data => {
+          this.router.navigate(['']);
+        },
+        error: err => {
+          // Gestione degli errori di login
+          console.error('Login error:', err);
+        }
+      });
+  }
 }
