@@ -20,14 +20,14 @@
   <div class="card-footer">
     <div class="card-btns">
 
-      <button class="learn-more">
+      <button class="learn-more" routerLink="/recipe/detail" >
         <span class="circle" aria-hidden="true">
         <span class="icon arrow"></span>
         </span>
         <span class="button-text">Esplora</span>
       </button>
 
-      <label class="ui-like">
+      <label *ngIf="isUserLoggedIn" class="ui-like">
         <input type="checkbox">
         <div class="like">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="">

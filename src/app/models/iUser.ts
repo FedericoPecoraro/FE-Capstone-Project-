@@ -4,6 +4,6 @@ export interface iUser {
   lastName: string,
   username: string,
   email:string
-  password?:string
+  password:string
   admin: boolean
 }

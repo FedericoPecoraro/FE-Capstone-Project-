@@ -15,7 +15,7 @@ type AccessData = {
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
+export class AuthService {
   jwtHelper: JwtHelperService = new JwtHelperService()
 
   authSubject = new BehaviorSubject<iUser | null>(null);

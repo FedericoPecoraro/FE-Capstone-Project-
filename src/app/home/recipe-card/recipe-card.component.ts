@@ -1,5 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { UserService } from '../../user/user.service';
+import { AuthService } from '../../auth/auth.service';
 import { RecipeResponse } from '../../models/recipe.interface';
 
 @Component({
@@ -7,11 +8,20 @@ import { RecipeResponse } from '../../models/recipe.interface';
   templateUrl: './recipe-card.component.html',
   styleUrls: ['./recipe-card.component.scss']
 })
-export class RecipeCardComponent {
-
+export class RecipeCardComponent implements OnInit {
   @Input() recipe!: RecipeResponse;
 
-  constructor(private userSvc: UserService) {}
+  isUserLoggedIn: boolean = false;
+  isAdmin: boolean = false;
+
+  constructor(private userSvc: UserService, private authSvc: AuthService) {}
+
+  ngOnInit() {
+    this.authSvc.isLoggedIn$.subscribe(data => {
+      this.isUserLoggedIn = data;
+      this.isAdmin = this.authSvc.isAdmin;
+    });
+  }
 
   addToFavorites(recipe: RecipeResponse) {
     const userId = this.userSvc.getCurrentUserId();

@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, GuardResult, MaybeAsync, Router, RouterStateSnapshot } from '@angular/router';
-import { UserService } from './auth.service';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GuestGuard {
   constructor(
-    private authSvc:UserService,
+    private authSvc:AuthService,
     private router:Router
     ){}
 

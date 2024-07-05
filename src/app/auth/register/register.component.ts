@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { iUser } from '../../models/iUser';
-import { UserService } from '../auth.service';
+import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -12,14 +12,14 @@ export class RegisterComponent {
   registerData: Partial<iUser> = {}
 
   constructor(
-    private authSvc: UserService,
+    private authSvc: AuthService,
     private router: Router
   ) { }
 
   signUp() {
     this.authSvc.register(this.registerData)
       .subscribe(data => {
-        this.router.navigate(['user/login'])
+        this.router.navigate(['/user/login'])
       })
   }
 }

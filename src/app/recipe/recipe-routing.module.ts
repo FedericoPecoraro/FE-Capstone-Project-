@@ -5,7 +5,8 @@ import { VeganRecipeComponent } from './vegan-recipe/vegan-recipe.component';
 import { VegetarianRecipeComponent } from './vegetarian-recipe/vegetarian-recipe.component';
 import { GlutenFreeRecipeComponent } from './gluten-free-recipe/gluten-free-recipe.component';
 import { UserRecipeComponent } from './user-recipe/user-recipe.component';
-import { EditRecipeComponent } from './edit-recipe/edit-recipe.component';
+import { DetailRecipeComponent } from './detail-recipe/detail-recipe.component';
+import { CreateRecipeComponent } from './create-recipe/create-recipe.component';
 
 const routes: Routes = [
   { path: '', component: RecipeComponent },
@@ -13,7 +14,8 @@ const routes: Routes = [
   { path: 'recipe/vegetarian', component: VegetarianRecipeComponent },
   { path: 'recipe/gluten-free', component: GlutenFreeRecipeComponent },
   { path: 'recipe/user', component: UserRecipeComponent },
-  { path: 'recipe/edit', component: EditRecipeComponent },
+  { path: 'recipe/detail', component: DetailRecipeComponent },
+  { path: 'recipe/create', component: CreateRecipeComponent },
 ];
 
 @NgModule({

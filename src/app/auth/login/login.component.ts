@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { LoginData } from '../../models/iLoginData';
-import { UserService } from '../auth.service';
+import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -12,7 +12,7 @@ export class LoginComponent {
   loginData: LoginData = { username: '', password: '' };
 
   constructor(
-    private authSvc: UserService,
+    private authSvc: AuthService,
     private router: Router
   ) {}
 

@@ -31,7 +31,7 @@
 
 
   <div class="create-btn">
-    <button class="Btn">
+    <button routerLink="/recipe/create" *ngIf="isUserLoggedIn" class="Btn">
       <div class="sign">+</div>
       <div class="text">Crea</div>
     </button>

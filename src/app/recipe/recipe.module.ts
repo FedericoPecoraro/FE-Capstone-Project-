@@ -6,7 +6,8 @@ import { VeganRecipeComponent } from './vegan-recipe/vegan-recipe.component';
 import { VegetarianRecipeComponent } from './vegetarian-recipe/vegetarian-recipe.component';
 import { GlutenFreeRecipeComponent } from './gluten-free-recipe/gluten-free-recipe.component';
 import { UserRecipeComponent } from './user-recipe/user-recipe.component';
-import { EditRecipeComponent } from './edit-recipe/edit-recipe.component';
+import { DetailRecipeComponent } from './detail-recipe/detail-recipe.component';
+import { CreateRecipeComponent } from './create-recipe/create-recipe.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { EditRecipeComponent } from './edit-recipe/edit-recipe.component';
     VegetarianRecipeComponent,
     GlutenFreeRecipeComponent,
     UserRecipeComponent,
-    EditRecipeComponent
+    DetailRecipeComponent,
+    CreateRecipeComponent
   ],
   imports: [
     CommonModule,
