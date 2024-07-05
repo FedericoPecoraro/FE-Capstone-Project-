@@ -1,0 +1,506 @@
+.card {
+  position: relative;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid #00000020;
+  border-radius: 0.8rem;
+}
+
+.card-smooth-caption,
+.card-img-overlay {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.card-smooth-caption {
+  background: linear-gradient(#00000000, #000000fa) #00000000;
+  padding: 2rem 1.5rem 1.5rem;
+}
+
+.card-footer {
+  padding: 1.5rem;
+  background-color: transparent;
+  border-top: 0;
+}
+
+.card-cup,
+.card-img {
+  border-top-right-radius: 0.8rem;
+  border-top-left-radius: 0.8rem;
+}
+
+.card > hr {
+  margin-right: 0;
+  margin-left: 0;
+}
+
+.card-body {
+  flex: 1 1 auto;
+  min-height: 1px;
+  padding: 1rem 1.25rem;
+}
+
+.card-title {
+  line-height: 1.5;
+  margin-bottom: 0.5rem;
+  font-size: 20px;
+  font-family: Roboto;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.badge-warning2,
+.text-muted,
+.read-more {
+  font-family: Roboto, sans-serif !important;
+}
+
+.card-subtitle,
+.card-text:last-child {
+  margin-bottom: 0;
+}
+
+.card-subtitle {
+  font-weight: 400;
+  margin-top: 0.2rem;
+}
+
+@media (min-width: 420px) {
+  .card-columns {
+    column-count: 2;
+    column-gap: 0.5rem;
+    orphans: 2;
+    widows: 2 !important;
+  }
+}
+
+@media (min-width: 576px) {
+  .card-columns .card {
+    display: inline-block;
+    width: 100%;
+  }
+
+  .card-columns {
+    column-count: 3;
+    column-gap: 0.5rem;
+    orphans: 4;
+    widows: 4;
+  }
+
+  .container {
+    max-width: 98%;
+  }
+}
+
+@media (min-width: 796px) {
+  .card-columns {
+    column-count: 3;
+    column-gap: 1.125rem;
+    orphans: 4;
+    widows: 4;
+  }
+}
+
+@media (min-width: 966px) {
+  .card-columns {
+    column-count: 3;
+    column-gap: 1.25rem;
+    orphans: 1;
+    widows: 1;
+  }
+
+  .container {
+    max-width: 80%;
+  }
+}
+
+@media (min-width: 1200px) {
+  .card-columns {
+    column-count: 3;
+    column-gap: 1.25rem;
+    orphans: 1;
+    widows: 1;
+  }
+}
+
+p.card-text,
+.secondary {
+  font-size: 16px;
+  font-weight: 400;
+  font-style: normal;
+  opacity: 0.75;
+  line-height: 25px;
+  text-overflow: clip;
+  font-family: source sans pro;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.card.border-0 {
+  box-shadow: 0 1px 3px #0000001f, 0 1px 2px #0000003d !important;
+  background: hsl(220deg 14% 97%) !important;
+  text-align: left;
+  background-color: #fff !important;
+  position: relative;
+  margin-top: 12px !important;
+  border: 1px solid #eee !important;
+  transition: 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  color: #000 !important;
+}
+
+.read-more {
+  border-radius: 5px !important;
+  letter-spacing: 0.5px !important;
+  box-shadow: 0 1px 3px #0000001a, 0 1px 2px #00000033,
+    inset 1px 1px 1px #ffffff99, inset -1px -1px 1px #0c0d120f,
+    -1px -1px 1px #ffffff99, -1px -1px 4px #ffffff99, -2px -2px 8px #ffffff99,
+    1px 1px 1px #0c0d120f, 1px 1px 4px #0c0d120f, 2px 2px 8px #0c0d120f !important;
+  background-color: hsl(228deg 14% 93%);
+  text-shadow: 0.25px 0.25px 0.25px hsl(233deg 5% 26% / 85%),
+    0.35px 0.35px 0.35px hsl(233deg 5% 26% / 85%), 0 -1.1px 0 rgb(12 13 18 / 8%),
+    0 1.2px 0 #fff !important;
+  color: hsl(233deg 5% 26%) !important;
+  font-weight: 300 !important;
+  border: none !important;
+  padding: 6px 12px;
+  text-transform: uppercase;
+  font-size: 11px;
+}
+
+span.badge.badge-light {
+  padding: 3.5px 5.5px;
+  font-size: 12px;
+  background-image: linear-gradient(#c1353e, #c22b3a, #e42d49, #e32c3e);
+  box-shadow: 0 0 0.25px #e42d49,
+    -0.5px -0.75px 1px rgb(241 249 255 / 15%) inset,
+    -0.75px -1.5px 1.5px rgb(44 6 13 / 5%) inset, 0 -0.5px 0.75px 0.25px #c1353e,
+    0 0.5px 0.75px 0.25px #e32c3e, 0 -0.75px 2px -0.75px #c1353e,
+    0 0.75px 2px -0.75px #e32c3e, -0.5px -2px 3px 0.75px rgb(44 6 13 / 85%),
+    -1.75px -2.5px 2.5px -0.25px rgb(150 90 64 / 35%),
+    -0.75px -0.75px 0.625px 0.25px rgb(150 90 64 / 50%),
+    -0.85px -0.35px 0.85px 0 rgb(201 149 135 / 55%),
+    -1.25px -1.25px 1.65px 0 rgb(201 149 135 / 25%);
+  border-radius: 4px;
+  font-family: Roboto;
+  color: #fff;
+}
+
+.card-img-overlay.three {
+  content: " ";
+  height: 140px;
+  width: 100%;
+  display: block;
+  position: relative;
+  background-image: url(https://cdn.shopify.com/s/files/1/0758/3005/products/A3_DAY_ArtPrint_1200x.jpg?v=1605692196);
+  background-size: cover;
+  border-radius: 12px 12px 2px 2px;
+  background-position: 50% 50%;
+}
+
+//Open Recipe Button
+
+button {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  outline: none;
+  border: 0;
+  vertical-align: middle;
+  text-decoration: none;
+  background: transparent;
+  padding: 0;
+  font-size: inherit;
+  font-family: inherit;
+}
+
+button.learn-more {
+  width: 12rem;
+  height: auto;
+}
+
+button.learn-more .circle {
+  transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+  position: relative;
+  display: block;
+  margin: 0;
+  width: 3rem;
+  height: 3rem;
+  background: #282936;
+  border-radius: 1.625rem;
+}
+
+button.learn-more .circle .icon {
+  transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  background: #fff;
+}
+
+button.learn-more .circle .icon.arrow {
+  transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+  left: 0.625rem;
+  width: 1.125rem;
+  height: 0.125rem;
+  background: none;
+}
+
+button.learn-more .circle .icon.arrow::before {
+  position: absolute;
+  content: "";
+  top: -0.23rem;
+  right: 0.0625rem;
+  width: 0.625rem;
+  height: 0.625rem;
+  border-top: 0.125rem solid #fff;
+  border-right: 0.125rem solid #fff;
+  transform: rotate(45deg);
+}
+
+button.learn-more .button-text {
+  transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 0.75rem 0;
+  color: #282936;
+  font-weight: 700;
+  line-height: 1.6;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+button:hover .circle {
+  width: 80%;
+}
+
+button:hover .circle .icon.arrow {
+  background: #fff;
+  transform: translate(1rem, 0);
+}
+
+button:hover .button-text {
+  color: #fff;
+}
+
+
+
+
+//Like Button
+
+.ui-like {
+  --icon-size: 30px;
+  --icon-secondary-color: rgb(198, 198, 198);
+  --icon-hover-color: rgb(143, 143, 143);
+  --icon-primary-color: rgb(230, 26, 26);
+  --icon-circle-border: 1px solid var(--icon-primary-color);
+  --icon-circle-size: 40px;
+  --icon-anmt-duration: 0.3s;
+}
+
+.ui-like input {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  display: none;
+}
+
+.ui-like .like {
+  width: var(--icon-size);
+  height: auto;
+  fill: var(--icon-secondary-color);
+  cursor: pointer;
+  -webkit-transition: 0.2s;
+  -o-transition: 0.2s;
+  transition: 0.2s;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  position: relative;
+  -webkit-transform-origin: top;
+  -ms-transform-origin: top;
+  transform-origin: top;
+}
+
+.like::after {
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  -webkit-box-shadow: 0 30px 0 -4px var(--icon-primary-color),
+    30px 0 0 -4px var(--icon-primary-color),
+    0 -30px 0 -4px var(--icon-primary-color),
+    -30px 0 0 -4px var(--icon-primary-color),
+    -22px 22px 0 -4px var(--icon-primary-color),
+    -22px -22px 0 -4px var(--icon-primary-color),
+    22px -22px 0 -4px var(--icon-primary-color),
+    22px 22px 0 -4px var(--icon-primary-color);
+  box-shadow: 0 30px 0 -4px var(--icon-primary-color),
+    30px 0 0 -4px var(--icon-primary-color),
+    0 -30px 0 -4px var(--icon-primary-color),
+    -30px 0 0 -4px var(--icon-primary-color),
+    -22px 22px 0 -4px var(--icon-primary-color),
+    -22px -22px 0 -4px var(--icon-primary-color),
+    22px -22px 0 -4px var(--icon-primary-color),
+    22px 22px 0 -4px var(--icon-primary-color);
+  border-radius: 50%;
+  -webkit-transform: scale(0);
+  -ms-transform: scale(0);
+  transform: scale(0);
+}
+
+.like::before {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  border: var(--icon-circle-border);
+  opacity: 0;
+}
+
+/* actions */
+
+.ui-like:hover .like {
+  fill: var(--icon-hover-color);
+}
+
+.ui-like input:checked + .like::after {
+  -webkit-animation: circles var(--icon-anmt-duration)
+    cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  animation: circles var(--icon-anmt-duration)
+    cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  -webkit-animation-delay: var(--icon-anmt-duration);
+  animation-delay: var(--icon-anmt-duration);
+}
+
+.ui-like input:checked + .like {
+  fill: var(--icon-primary-color);
+  -webkit-animation: like var(--icon-anmt-duration) forwards;
+  animation: like var(--icon-anmt-duration) forwards;
+  -webkit-transition-delay: 0.3s;
+  -o-transition-delay: 0.3s;
+  transition-delay: 0.3s;
+}
+
+.ui-like input:checked + .like::before {
+  -webkit-animation: circle var(--icon-anmt-duration)
+    cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  animation: circle var(--icon-anmt-duration)
+    cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  -webkit-animation-delay: var(--icon-anmt-duration);
+  animation-delay: var(--icon-anmt-duration);
+}
+
+@-webkit-keyframes like {
+  50% {
+    -webkit-transform: scaleY(0.6);
+    transform: scaleY(0.6);
+  }
+
+  100% {
+    -webkit-transform: scaleY(1);
+    transform: scaleY(1);
+  }
+}
+
+@keyframes like {
+  50% {
+    -webkit-transform: scaleY(0.6);
+    transform: scaleY(0.6);
+  }
+
+  100% {
+    -webkit-transform: scaleY(1);
+    transform: scaleY(1);
+  }
+}
+
+@-webkit-keyframes circle {
+  from {
+    width: 0;
+    height: 0;
+    opacity: 0;
+  }
+
+  90% {
+    width: var(--icon-circle-size);
+    height: var(--icon-circle-size);
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes circle {
+  from {
+    width: 0;
+    height: 0;
+    opacity: 0;
+  }
+
+  90% {
+    width: var(--icon-circle-size);
+    height: var(--icon-circle-size);
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+@-webkit-keyframes circles {
+  from {
+    -webkit-transform: scale(0);
+    transform: scale(0);
+  }
+
+  40% {
+    opacity: 1;
+  }
+
+  to {
+    -webkit-transform: scale(0.8);
+    transform: scale(0.8);
+    opacity: 0;
+  }
+}
+
+@keyframes circles {
+  from {
+    -webkit-transform: scale(0);
+    transform: scale(0);
+  }
+
+  40% {
+    opacity: 1;
+  }
+
+  to {
+    -webkit-transform: scale(0.8);
+    transform: scale(0.8);
+    opacity: 0;
+  }
+}
+
+.card-btns {
+  display: flex;
+  justify-content: space-between;
+}

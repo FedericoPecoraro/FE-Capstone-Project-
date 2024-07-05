@@ -1,122 +1,124 @@
-import { Injectable } from '@angular/core';
 import { iUser } from '../models/iUser';
-import { JwtHelperService } from '@auth0/angular-jwt';
-import { BehaviorSubject, Observable, map, tap } from 'rxjs';
+import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Router } from '@angular/router';
-import { LoginData } from '../models/login-data';
-import { environment } from '../../environments/environment.development';
-
-type AccessData = {
-  accessToken: string,
-  user: iUser
-}
+import { Observable, of } from 'rxjs';
+import { catchError, map, switchMap } from 'rxjs/operators';
+import { environment } from '../../environments/environment';
+import { RecipeResponse } from '../models/recipe.interface';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  jwtHelper: JwtHelperService = new JwtHelperService()
+  private baseUrl: string = `${environment.apiUrl}/users`;
+  private recipeUrl: string = `${environment.apiUrl}/recipes`;
+  private headers = new HttpHeaders().set('Content-Type', 'application/json');
 
-  authSubject = new BehaviorSubject<iUser | null>(null);
+  constructor(private http: HttpClient) { }
 
-  user$ = this.authSubject.asObservable().pipe(
-    tap(user => {
-      if (!user) return
-      const newAccessData: AccessData = {
-        accessToken: this.getAccessToken(),
-        user: user
-      }
-      const jsonUser = JSON.stringify(newAccessData)
-      localStorage.setItem('accessData', jsonUser)
-    })
-  )
-
-  isLoggedIn$ = this.user$.pipe(
-    map(user => !!user),
-    tap(user => this.syncIsLoggedIn = user)
-  )
-
-  syncIsLoggedIn: boolean = false;
-  isAdmin: boolean = false;
-
-  constructor(
-    private http: HttpClient,
-    private router: Router
-  ) {
-    this.restoreUser()
+  private getAuthHeaders(): HttpHeaders {
+    const token = localStorage.getItem('token'); // <-- Utilizza 'token' o 'accessToken' in modo coerente
+    return new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    });
   }
 
-  registerUrl: string = `${environment.apiUrl}/users`;
-  loginUrl: string = `${environment.apiUrl}/users/login`;
-
-  register(newUser: Partial<iUser>): Observable<AccessData> {
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.post<AccessData>(this.registerUrl, newUser, { headers, withCredentials: true });
+  login(username: string, password: string): Observable<{ user: iUser; token: string }> {
+    return this.http.post<{ user: iUser; token: string }>(`${this.baseUrl}/login`, { username, password }, { headers: this.headers })
+      .pipe(
+        catchError(this.handleError<{ user: iUser; token: string }>('login'))
+      );
   }
 
-  login(loginData: LoginData): Observable<AccessData> {
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.post<AccessData>(this.loginUrl, loginData, { headers, withCredentials: true })
-      .pipe(tap(data => {
-        this.isAdmin = data.user.admin
-        this.authSubject.next(data.user)
-        localStorage.setItem('accessData', JSON.stringify(data))
-        this.autoLogout(data.accessToken)
-      }))
+  register(user: Partial<iUser>): Observable<iUser> {
+    return this.http.post<iUser>(`${this.baseUrl}/register`, user, { headers: this.headers })
+      .pipe(
+        catchError(this.handleError<iUser>('register'))
+      );
   }
 
-  logout() {
-    this.isAdmin = false
-    this.authSubject.next(null)
-    localStorage.removeItem('accessData')
-    this.router.navigate(['/user/login'])
+  registerAdmin(user: Partial<iUser>): Observable<iUser> {
+    return this.http.post<iUser>(`${this.baseUrl}/registerAdmin`, user, { headers: this.headers })
+      .pipe(
+        catchError(this.handleError<iUser>('registerAdmin'))
+      );
   }
 
-  getAccessToken(): string {
-    const userJson = localStorage.getItem('accessData')
-    if (!userJson) return '';
-
-    const accessData: AccessData = JSON.parse(userJson)
-    if (this.jwtHelper.isTokenExpired(accessData.accessToken)) return '';
-
-    return accessData.accessToken
+  deleteUser(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.baseUrl}/${id}`, { headers: this.getAuthHeaders() })
+      .pipe(
+        catchError(this.handleError<void>('deleteUser'))
+      );
   }
 
-  autoLogout(jwt: string) {
-    const expDate = this.jwtHelper.getTokenExpirationDate(jwt);
-    if (!expDate) return; // Se la data di scadenza è null, non fare nulla
-
-    const expMs = expDate.getTime() - new Date().getTime();
-
-    setTimeout(() => {
-      this.logout()
-    }, expMs)
+  updateUser(id: number, user: Partial<iUser>): Observable<iUser> {
+    return this.http.put<iUser>(`${this.baseUrl}/${id}`, user, { headers: this.getAuthHeaders() })
+      .pipe(
+        catchError(this.handleError<iUser>('updateUser'))
+      );
   }
 
-  restoreUser() {
-    const userJson = localStorage.getItem('accessData')
-    if (!userJson) return;
-
-    const accessData: AccessData = JSON.parse(userJson)
-    if (this.jwtHelper.isTokenExpired(accessData.accessToken)) return;
-
-    this.authSubject.next(accessData.user)
-    this.autoLogout(accessData.accessToken)
+  getAllUsers(): Observable<iUser[]> {
+    return this.http.get<iUser[]>(this.baseUrl, { headers: this.getAuthHeaders() })
+      .pipe(
+        catchError(this.handleError<iUser[]>('getAllUsers', []))
+      );
   }
 
-  errors(err: any) {
-    switch (err.error) {
-      case "Email and Password are required":
-        return new Error('Email e password obbligatorie');
-      case "Email already exists":
-        return new Error('Utente esistente');
-      case 'Email format is invalid':
-        return new Error('Email non valida');
-      case 'Cannot find user':
-        return new Error('utente inesistente');
-      default:
-        return new Error('Errore');
+  uploadAvatar(id: number, image: File): Observable<string> {
+    const formData = new FormData();
+    formData.append('image', image);
+    return this.http.post<{ url: string }>(`${this.baseUrl}/${id}/avatar`, formData, { headers: this.getAuthHeaders() })
+      .pipe(
+        map(response => response.url),
+        catchError(this.handleError<string>('uploadAvatar'))
+      );
+  }
+
+  deleteAvatar(id: number): Observable<string> {
+    return this.http.delete<{ message: string }>(`${this.baseUrl}/${id}/avatar`, { headers: this.getAuthHeaders() })
+      .pipe(
+        map(response => response.message),
+        catchError(this.handleError<string>('deleteAvatar'))
+      );
+  }
+
+  updateAvatar(id: number, image: File): Observable<string> {
+    return this.deleteAvatar(id).pipe(
+      switchMap(() => this.uploadAvatar(id, image)),
+      catchError(this.handleError<string>('updateAvatar'))
+    );
+  }
+
+  likeRecipe(userId: number, recipeId: number): Observable<void> {
+    return this.http.post<void>(`${this.recipeUrl}/${recipeId}/like`, { userId }, { headers: this.getAuthHeaders() })
+      .pipe(
+        catchError(this.handleError<void>('likeRecipe'))
+      );
+  }
+
+  unlikeRecipe(userId: number, recipeId: number): Observable<void> {
+    return this.http.post<void>(`${this.recipeUrl}/${recipeId}/unlike`, { userId }, { headers: this.getAuthHeaders() })
+      .pipe(
+        catchError(this.handleError<void>('unlikeRecipe'))
+      );
+  }
+
+  getCurrentUserId(): number | null {
+    const token = localStorage.getItem('token');
+    if (token) {
+      // Decodifica il token JWT per ottenere le informazioni sull'utente
+      const tokenPayload = JSON.parse(atob(token.split('.')[1]));
+      return tokenPayload.id; // Supponendo che l'ID dell'utente sia presente nel payload del token
     }
+    return null; // Ritorna null se il token non è presente o non è valido
+  }
+
+  private handleError<T>(operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
+      console.error(`${operation} failed: ${error.message}`);
+      return of(result as T);
+    };
   }
 }
