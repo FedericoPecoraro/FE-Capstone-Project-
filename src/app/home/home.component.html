@@ -2,45 +2,89 @@
   <div class="content">
     <h2>Be Part of Flavor-Hub</h2>
     <p>Crea la tua ricetta ed esplora il gusto</p>
-    </div>
+  </div>
   <div class="waves"></div>
 </section>
 
 <div class="under-hero-div">
 
-  <div class="search-bar">
-    <div class="search">
-      <div class="search-box">
-        <div class="search-field">
-          <input placeholder="Cerca Ricetta..." class="input" type="text">
-          <div class="search-box-icon">
-            <button class="btn-icon-content">
-              <i class="search-icon">
-                <svg xmlns="://www.w3.org/2000/svg" version="1.1" viewBox="0 0 512 512">
-                  <path
-                    d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"
-                    fill="#fff"></path>
-                </svg>
-              </i>
-            </button>
+  <div class="container mt-2">
+    <div class="row">
+      <div class="col-12 d-flex justify-content-between">
+
+        <div class="search-bar mx-auto">
+
+          <div class="row height d-flex justify-content-center align-items-center">
+            <div class="col-md-12">
+
+              <div class="form">
+                <i class="fa fa-search"></i>
+                <input type="text" class="form-control form-input" placeholder="Cerca ricetta.." [(ngModel)]="query"
+                  (input)="searchRecipes()">
+              </div>
+
+            </div>
           </div>
+
+
         </div>
+
+        <div class="create-btn ml-auto" *ngIf="isUserLoggedIn">
+          <button routerLink="/recipe/create" class="Btn">
+            <div class="sign">+</div>
+            <div class="text">Crea</div>
+          </button>
+        </div>
+
       </div>
     </div>
   </div>
 
-
-  <div class="create-btn">
-    <button routerLink="/recipe/create" *ngIf="isUserLoggedIn" class="Btn">
-      <div class="sign">+</div>
-      <div class="text">Crea</div>
-    </button>
+  <div class="searched-div" *ngIf="searchedRecipes && searchedRecipes.length > 0">
+    <div class="recipe-list">
+      <div class="d-flex justify-content-center mt-1">
+        <h3 class="search-title">Risultati della Ricerca:</h3>
+      </div>
+      <div class="row g-5 px-0 mx-0 mt-2 mb-5">
+        <div *ngFor="let recipe of searchedRecipes" class="col-12 col-sm-6 col-md-4 col-lg-3">
+          <app-recipe-card [recipe]="recipe"></app-recipe-card>
+        </div>
+      </div>
+    </div>
+    <svg class="editorial" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+      viewBox="0 24 150 28 " preserveAspectRatio="none">
+      <defs>
+        <path id="gentle-wave" d="M-160 44c30 0
+      58-18 88-18s
+      58 18 88 18
+      58-18 88-18
+      58 18 88 18
+      v44h-352z" />
+      </defs>
+      <g class="parallax1">
+        <use xlink:href="#gentle-wave" x="50" y="3" fill="#f461c1" />
+      </g>
+      <g class="parallax2">
+        <use xlink:href="#gentle-wave" x="50" y="0" fill="#4579e2" />
+      </g>
+      <g class="parallax3">
+        <use xlink:href="#gentle-wave" x="50" y="9" fill="#3461c1" />
+      </g>
+      <g class="parallax4">
+        <use xlink:href="#gentle-wave" x="50" y="6" fill="none" />
+      </g>
+    </svg>
   </div>
+
+</div>
+<div class="recipe-title d-flex justify-content-center mt-2">
+  <h3>
+    Tutte le Vostre Ricette:
+  </h3>
 </div>
 
-<div class="row g-5 px-0 mx-0">
+<div class="row g-5 px-0 mx-0 mt-2 mb-5">
   <div *ngFor="let recipe of recipeArr" class="col-12 col-sm-6 col-md-4 col-lg-3">
     <app-recipe-card [recipe]="recipe"></app-recipe-card>
   </div>
 </div>
-

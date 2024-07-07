@@ -27,6 +27,24 @@ export class RecipeService {
     });
   }
 
+  getIngredients(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}/ingredients`, {
+      headers: this.getHeaders()
+    });
+  }
+
+  getUtensils(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}/utensils`, {
+      headers: this.getHeaders()
+    });
+  }
+
+  getTags(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}/tags`, {
+      headers: this.getHeaders()
+    });
+  }
+
   editRecipe(id: number, recipeRequest: RecipeRequest): Observable<RecipeResponse> {
     return this.http.put<RecipeResponse>(`${this.baseUrl}/${id}`, recipeRequest, {
       headers: this.getHeaders()
