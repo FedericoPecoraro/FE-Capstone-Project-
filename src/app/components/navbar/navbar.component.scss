@@ -11,8 +11,12 @@
   transition-duration: 0.8s;
 }
 .logo {
-  width: 200px;
-  margin-top: 30px;
+  width: 220px;
+  margin-top: 18px;
+  transition: transform 0.2s ease
+}
+.logo:hover {
+  transform: translateY(-2px);
 }
 .auth-btns {
   display: flex;
