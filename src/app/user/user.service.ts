@@ -4,7 +4,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
-import { RecipeResponse } from '../models/recipe.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -17,12 +16,19 @@ export class UserService {
   constructor(private http: HttpClient) { }
 
   private getAuthHeaders(): HttpHeaders {
-    const token = localStorage.getItem('token'); // <-- Utilizza 'token' o 'accessToken' in modo coerente
+    const token = localStorage.getItem('accessToken');
+    if (token) {
+      return new HttpHeaders({
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      });
+    }
     return new HttpHeaders({
-      'Authorization': `Bearer ${token}`,
       'Content-Type': 'application/json'
     });
   }
+
+
 
   login(username: string, password: string): Observable<{ user: iUser; token: string }> {
     return this.http.post<{ user: iUser; token: string }>(`${this.baseUrl}/login`, { username, password }, { headers: this.headers })
@@ -52,12 +58,23 @@ export class UserService {
       );
   }
 
+  getUserById(id: number): Observable<iUser> {
+    return this.http.get<iUser>(`${this.baseUrl}/${id}`, { headers: this.getAuthHeaders() })
+      .pipe(
+        catchError(this.handleError<iUser>('getUserById'))
+      );
+  }
+
   updateUser(id: number, user: Partial<iUser>): Observable<iUser> {
+    console.log('Updating user with ID:', id);
+    console.log('User data:', user);
     return this.http.put<iUser>(`${this.baseUrl}/${id}`, user, { headers: this.getAuthHeaders() })
       .pipe(
         catchError(this.handleError<iUser>('updateUser'))
       );
   }
+
+
 
   getAllUsers(): Observable<iUser[]> {
     return this.http.get<iUser[]>(this.baseUrl, { headers: this.getAuthHeaders() })

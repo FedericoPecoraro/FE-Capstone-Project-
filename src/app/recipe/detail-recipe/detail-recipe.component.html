@@ -1,1 +1,38 @@
-<p>detail-recipe works!</p>
+<div *ngIf="recipe">
+  <h1>{{ recipe.title }}</h1>
+  <p>{{ recipe.description }}</p>
+  <p><strong>Tempo di Preparazione:</strong> {{ recipe.preparationTime }} minuti</p>
+  <p><strong>Tempo di Cottura:</strong> {{ recipe.cookingTime }} minuti</p>
+
+  <div *ngIf="recipe.ingredients.length > 0">
+    <h2>Ingredienti</h2>
+    <ul>
+      <li *ngFor="let ingredient of recipe.ingredients">
+        {{ ingredient.name }} ({{ ingredient.kcal }} kcal)
+      </li>
+    </ul>
+  </div>
+
+  <div *ngIf="recipe.utensils.length > 0">
+    <h2>Utensili</h2>
+    <ul>
+      <li *ngFor="let utensil of recipe.utensils">
+        {{ utensil.name }}
+      </li>
+    </ul>
+  </div>
+
+  <div *ngIf="recipe.tags.length > 0">
+    <h2>Tag</h2>
+    <ul>
+      <li *ngFor="let tag of recipe.tags">
+        {{ tag.name }}
+      </li>
+    </ul>
+  </div>
+
+  <div>
+    <h2>Creato da</h2>
+    <p>{{ recipe.user.username }}</p>
+  </div>
+</div>

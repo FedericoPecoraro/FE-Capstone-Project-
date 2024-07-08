@@ -10,12 +10,12 @@ import { CreateRecipeComponent } from './create-recipe/create-recipe.component';
 
 const routes: Routes = [
   { path: '', component: RecipeComponent },
-  { path: 'recipe/vegan', component: VeganRecipeComponent },
-  { path: 'recipe/vegetarian', component: VegetarianRecipeComponent },
-  { path: 'recipe/gluten-free', component: GlutenFreeRecipeComponent },
-  { path: 'recipe/user', component: UserRecipeComponent },
-  { path: 'recipe/detail', component: DetailRecipeComponent },
-  { path: 'recipe/create', component: CreateRecipeComponent },
+  { path: 'vegan', component: VeganRecipeComponent },
+  { path: 'vegetarian', component: VegetarianRecipeComponent },
+  { path: 'gluten-free', component: GlutenFreeRecipeComponent },
+  { path: 'user-recipes', component: UserRecipeComponent },
+  { path: 'detail/:id', component: DetailRecipeComponent },
+  { path: 'create', component: CreateRecipeComponent }
 ];
 
 @NgModule({

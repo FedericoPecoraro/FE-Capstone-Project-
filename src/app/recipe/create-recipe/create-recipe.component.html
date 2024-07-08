@@ -1,1 +1,51 @@
-<p>create-recipe works!</p>
+<div class="main-container">
+  <div class="container">
+    <form [formGroup]="recipeForm" (ngSubmit)="onSubmit()" class="form">
+      <p class="title">Crea Ricetta</p>
+      <p class="message">Crea la tua Ricetta Unica!</p>
+
+      <label>
+        <input class="input" type="text" formControlName="title" required>
+        <span>Nome Ricetta</span>
+      </label>
+
+      <label>
+        <input class="input" type="text" formControlName="description" required>
+        <span>Descrizione</span>
+      </label>
+
+      <label>
+        <input class="input" type="number" formControlName="preparationTime" required>
+        <span>Tempo di Preparazione (minuti)</span>
+      </label>
+
+      <label>
+        <input class="input" type="number" formControlName="cookingTime" required>
+        <span>Tempo di Cottura (minuti)</span>
+      </label>
+
+      <label>
+        <select formControlName="ingredientIds" multiple>
+          <option *ngFor="let ingredient of ingredients" [value]="ingredient.id">{{ingredient.name}}</option>
+        </select>
+        <span>Ingredienti</span>
+      </label>
+
+      <label>
+        <select formControlName="utensilIds" multiple>
+          <option *ngFor="let utensil of utensils" [value]="utensil.id">{{utensil.name}}</option>
+        </select>
+        <span>Utensili</span>
+      </label>
+
+      <label>
+        <select formControlName="tagIds" multiple>
+          <option *ngFor="let tag of tags" [value]="tag.id">{{tag.name}}</option>
+        </select>
+        <span>Tag</span>
+      </label>
+
+      <button class="submit" type="submit" [disabled]="!recipeForm.valid">Salva</button>
+    </form>
+  </div>
+</div>

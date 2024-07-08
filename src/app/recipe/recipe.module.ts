@@ -8,6 +8,7 @@ import { GlutenFreeRecipeComponent } from './gluten-free-recipe/gluten-free-reci
 import { UserRecipeComponent } from './user-recipe/user-recipe.component';
 import { DetailRecipeComponent } from './detail-recipe/detail-recipe.component';
 import { CreateRecipeComponent } from './create-recipe/create-recipe.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,9 @@ import { CreateRecipeComponent } from './create-recipe/create-recipe.component';
   ],
   imports: [
     CommonModule,
-    RecipeRoutingModule
+    RecipeRoutingModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class RecipeModule { }

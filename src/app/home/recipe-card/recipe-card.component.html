@@ -20,12 +20,13 @@
   <div class="card-footer">
     <div class="card-btns">
 
-      <button class="learn-more" routerLink="/recipe/detail" >
+      <button class="learn-more" [routerLink]="['/recipe/detail', recipe.id]">
         <span class="circle" aria-hidden="true">
-        <span class="icon arrow"></span>
+          <span class="icon arrow"></span>
         </span>
         <span class="button-text">Esplora</span>
       </button>
+
 
       <label *ngIf="isUserLoggedIn" class="ui-like">
         <input type="checkbox" [checked]="isFavorite(recipe)" (change)="toggleFavorite(recipe)">

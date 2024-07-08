@@ -1,1 +1,37 @@
-<p>edit-user works!</p>
+<div class="main-container">
+  <div class="container">
+    <form class="form" [formGroup]="editUserForm" (ngSubmit)="onSubmit()">
+      <p class="title">Modifica i tuoi dati</p>
+      <p class="message">Aggiorna le tue informazioni personali</p>
+      <div class="flex">
+        <label>
+          <input class="input" type="text" formControlName="firstName" required>
+          <span>Nome</span>
+        </label>
+
+        <label>
+          <input class="input" type="text" formControlName="lastName" required>
+          <span>Cognome</span>
+        </label>
+      </div>
+
+      <label>
+        <input class="input" type="text" formControlName="username" required>
+        <span>Username</span>
+      </label>
+
+      <label>
+        <input class="input" type="email" formControlName="email" required>
+        <span>Email</span>
+      </label>
+
+      <label>
+        <input class="input" type="password" formControlName="password" required>
+        <span>Password</span>
+      </label>
+
+      <button type="submit" class="submit">Aggiorna</button>
+      <p class="signin">Hai finito? <a routerLink="/">Torna alla home</a></p>
+    </form>
+  </div>
+</div>

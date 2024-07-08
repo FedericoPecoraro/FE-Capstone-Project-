@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { RecipeRequest, RecipeResponse } from '../models/recipe.interface';
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -15,11 +14,22 @@ export class RecipeService {
   constructor(private http: HttpClient) { }
 
   private getHeaders(): HttpHeaders {
-    const token = localStorage.getItem('accessToken');
-    return new HttpHeaders({
-      'Authorization': `Bearer ${token}`
-    });
+    const accessData = localStorage.getItem('accessData');
+    if (accessData) {
+      const parsedAccessData = JSON.parse(accessData);
+      const token = parsedAccessData.accessToken;
+      return new HttpHeaders({
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      });
+    } else {
+      return new HttpHeaders({
+        'Content-Type': 'application/json'
+      });
+    }
   }
+
+
 
   createRecipe(recipeRequest: RecipeRequest): Observable<RecipeResponse> {
     return this.http.post<RecipeResponse>(this.baseUrl, recipeRequest, {
@@ -65,6 +75,14 @@ export class RecipeService {
     const params = new HttpParams().set('query', query);
     return this.http.get<RecipeResponse[]>(`${this.baseUrl}/search`, { params });
   }
+
+  getRecipeById(id: number): Observable<RecipeResponse> {
+    return this.http.get<RecipeResponse>(`${this.baseUrl}/${id}`, {
+      // Rimuovere l'header di autenticazione se non necessario
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    });
+}
+
 
   getRecipesByUser(username: string): Observable<RecipeResponse[]> {
     return this.http.get<RecipeResponse[]>(`${this.baseUrl}/user/${username}`);

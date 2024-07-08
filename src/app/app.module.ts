@@ -3,11 +3,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NavbarComponent } from './components/navbar/navbar.component';
-import { RecipeModule } from './recipe/recipe.module';
 import { HttpClientModule } from '@angular/common/http';
-import { UserModule } from './user/user.module';
 
 @NgModule({
   declarations: [
@@ -19,8 +17,7 @@ import { UserModule } from './user/user.module';
     AppRoutingModule,
     NgbModule,
     FormsModule,
-    RecipeModule,
-    UserModule,
+    ReactiveFormsModule,
     HttpClientModule
   ],
   providers: [],
