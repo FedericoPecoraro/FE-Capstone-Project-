@@ -9,6 +9,7 @@ import { UserRecipeComponent } from './user-recipe/user-recipe.component';
 import { DetailRecipeComponent } from './detail-recipe/detail-recipe.component';
 import { CreateRecipeComponent } from './create-recipe/create-recipe.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     RecipeRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ]
 })
 export class RecipeModule { }

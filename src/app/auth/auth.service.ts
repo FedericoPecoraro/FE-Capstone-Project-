@@ -8,7 +8,7 @@ import { LoginData } from '../models/iLoginData';
 import { environment } from '../../environments/environment.development';
 
 type AccessData = {
-  accessToken: string,
+  token: string,
   user: iUser
 }
 
@@ -20,17 +20,7 @@ export class AuthService {
 
   authSubject = new BehaviorSubject<iUser | null>(null);
 
-  user$ = this.authSubject.asObservable().pipe(
-    tap(user => {
-      if (!user) return;
-      const newAccessData: AccessData = {
-        accessToken: this.getAccessToken(),
-        user: user
-      };
-      const jsonUser = JSON.stringify(newAccessData);
-      localStorage.setItem('accessData', jsonUser);
-    })
-  );
+  user$ = this.authSubject.asObservable()
 
   isLoggedIn$ = this.user$.pipe(
     map(user => !!user),
@@ -59,27 +49,24 @@ export class AuthService {
   }
 
   login(loginData: LoginData): Observable<AccessData> {
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.post<AccessData>(this.loginUrl, loginData, { headers, withCredentials: true })
+    return this.http.post<AccessData>(this.loginUrl, loginData)
       .pipe(
         tap(data => {
-          this.isAdmin = data.user.admin;
           this.authSubject.next(data.user);
           localStorage.setItem('accessData', JSON.stringify(data));
-          this.autoLogout(data.accessToken);
+          this.autoLogout(data.token);
         }),
         catchError(this.handleError<AccessData>('login'))
       );
   }
 
-  getAuthHeaders(): HttpHeaders {
-    const token = localStorage.getItem('accessData');
-    const parsedToken = token ? JSON.parse(token).accessToken : '';
-    return new HttpHeaders({
-      'Authorization': `Bearer ${parsedToken}`,
-      'Content-Type': 'application/json'
-    });
-  }
+ //   const token = localStorage.getItem('accessData');
+ //   const parsedToken = token ? JSON.parse(token).accessToken : '';
+ //   return new HttpHeaders({
+  //    'Authorization': `Bearer ${parsedToken}`,
+  //    'Content-Type': 'application/json'
+  //  });
+//  }
 
   logout() {
     this.isAdmin = false;
@@ -90,12 +77,13 @@ export class AuthService {
 
   getAccessToken(): string {
     const userJson = localStorage.getItem('accessData');
+
     if (!userJson) return '';
 
     const accessData: AccessData = JSON.parse(userJson);
-    if (this.jwtHelper.isTokenExpired(accessData.accessToken)) return '';
+    if (this.jwtHelper.isTokenExpired(accessData.token)) return '';
 
-    return accessData.accessToken;
+    return accessData.token;
   }
 
   autoLogout(jwt: string) {
@@ -114,10 +102,10 @@ export class AuthService {
     if (!userJson) return;
 
     const accessData: AccessData = JSON.parse(userJson);
-    if (this.jwtHelper.isTokenExpired(accessData.accessToken)) return;
+    if (this.jwtHelper.isTokenExpired(accessData.token)) return;
 
     this.authSubject.next(accessData.user);
-    this.autoLogout(accessData.accessToken);
+    this.autoLogout(accessData.token);
   }
 
   private handleError<T>(operation = 'operation', result?: T) {
@@ -140,5 +128,9 @@ export class AuthService {
       default:
         return new Error('Errore');
     }
+  }
+
+  getCurrentUser(): Observable<iUser | null> {
+    return this.authSubject.asObservable();
   }
 }

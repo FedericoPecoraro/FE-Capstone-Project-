@@ -3,6 +3,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RecipeService } from '../recipe.service';
 import { RecipeRequest } from '../../models/recipe.interface';
 import { Router } from '@angular/router';
+import { AuthService } from '../../auth/auth.service';
+import { iUser } from '../../models/iUser';
+import { catchError, tap } from 'rxjs/operators';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'app-create-recipe',
@@ -15,11 +19,13 @@ export class CreateRecipeComponent implements OnInit {
   ingredients: any[] = [];
   utensils: any[] = [];
   tags: any[] = [];
+  currentUser: iUser | null = null;
 
   constructor(
     private fb: FormBuilder,
     private recipeService: RecipeService,
-    private router: Router
+    private router: Router,
+    private authSvc: AuthService
   ) { }
 
   ngOnInit(): void {
@@ -27,7 +33,9 @@ export class CreateRecipeComponent implements OnInit {
     this.loadIngredients();
     this.loadUtensils();
     this.loadTags();
-    this.checkAuthentication();
+    this.authSvc.getCurrentUser().subscribe(user => {
+      this.currentUser = user;
+    });
   }
 
   initForm(): void {
@@ -43,78 +51,76 @@ export class CreateRecipeComponent implements OnInit {
   }
 
   loadIngredients(): void {
-    this.recipeService.getIngredients().subscribe(
-      ingredients => {
+    this.recipeService.getIngredients().pipe(
+      tap(ingredients => {
         this.ingredients = ingredients;
         console.log('Ingredienti caricati:', this.ingredients);
-      },
-      error => {
+      }),
+      catchError(error => {
         console.error('Errore durante il recupero degli ingredienti:', error);
         if (error.status === 401) {
           console.error('Errore di autenticazione. Token non valido o scaduto.');
           this.router.navigate(['/auth/login']);
         }
-      }
-    );
+        return of([]);
+      })
+    ).subscribe();
   }
 
   loadUtensils(): void {
-    this.recipeService.getUtensils().subscribe(
-      utensils => {
+    this.recipeService.getUtensils().pipe(
+      tap(utensils => {
         this.utensils = utensils;
         console.log('Utensili caricati:', this.utensils);
-      },
-      error => {
+      }),
+      catchError(error => {
         console.error('Errore durante il recupero degli utensili:', error);
         if (error.status === 401) {
           console.error('Errore di autenticazione. Token non valido o scaduto.');
           this.router.navigate(['/auth/login']);
         }
-      }
-    );
+        return of([]);
+      })
+    ).subscribe();
   }
 
   loadTags(): void {
-    this.recipeService.getTags().subscribe(
-      tags => {
+    this.recipeService.getTags().pipe(
+      tap(tags => {
         this.tags = tags;
         console.log('Tag caricati:', this.tags);
-      },
-      error => {
+      }),
+      catchError(error => {
         console.error('Errore durante il recupero dei tag:', error);
         if (error.status === 401) {
           console.error('Errore di autenticazione. Token non valido o scaduto.');
           this.router.navigate(['/auth/login']);
         }
-      }
-    );
+        return of([]);
+      })
+    ).subscribe();
   }
 
   onSubmit(): void {
-    if (this.recipeForm.valid) {
-      const recipeRequest: RecipeRequest = this.recipeForm.value;
-      this.recipeService.createRecipe(recipeRequest).subscribe(
-        response => {
+    if (this.recipeForm.valid && this.currentUser) {
+      const recipeRequest: RecipeRequest = {
+        ...this.recipeForm.value,
+        userId: this.currentUser.id
+      };
+      console.log(this.currentUser.id);
+
+      console.log(this.recipeForm.value);
+
+      this.recipeService.createRecipe(recipeRequest).pipe(
+        tap(response => {
           console.log('Ricetta creata con successo:', response);
           // Aggiungi logica aggiuntiva se necessario dopo la creazione della ricetta
-        },
-        error => {
+        }),
+        catchError(error => {
           console.error('Errore durante la creazione della ricetta:', error);
-          if (error.status === 401) {
-            console.error('Errore di autenticazione. Token non valido o scaduto.');
-            this.router.navigate(['/auth/login']);
-          }
-        }
-      );
-    }
-  }
-
-
-  checkAuthentication(): void {
-    const token = localStorage.getItem('accessData');
-    if (!token) {
-      console.error('Token non presente. Reindirizzamento al login.');
-      this.router.navigate(['/auth/login']);
+          return of(null);
+        })
+      ).subscribe();
     }
   }
 }

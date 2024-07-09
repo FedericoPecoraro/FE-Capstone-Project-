@@ -13,58 +13,45 @@ export class RecipeService {
 
   constructor(private http: HttpClient) { }
 
-  private getHeaders(): HttpHeaders {
-    const accessData = localStorage.getItem('accessData');
-    if (accessData) {
-      const parsedAccessData = JSON.parse(accessData);
-      const token = parsedAccessData.accessToken;
-      return new HttpHeaders({
-        'Authorization': `Bearer ${token}`,
-        'Content-Type': 'application/json'
-      });
-    } else {
-      return new HttpHeaders({
-        'Content-Type': 'application/json'
-      });
-    }
-  }
-
+ // private getHeaders(): HttpHeaders {
+  //  const accessData = localStorage.getItem('accessData');
+    //if (accessData) {
+    //  const parsedAccessData = JSON.parse(accessData);
+    //  const token = parsedAccessData.accessToken;
+    //  return new HttpHeaders({
+    //    'Authorization': `Bearer ${token}`,
+    //    'Content-Type': 'application/json'
+    //  });
+  //  } else {
+  //    return new HttpHeaders({
+  //      'Content-Type': 'application/json'
+  //    });
+  //  }
+//  }
 
 
   createRecipe(recipeRequest: RecipeRequest): Observable<RecipeResponse> {
-    return this.http.post<RecipeResponse>(this.baseUrl, recipeRequest, {
-      headers: this.getHeaders()
-    });
+    return this.http.post<RecipeResponse>(this.baseUrl, recipeRequest);
   }
 
   getIngredients(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.baseUrl}/ingredients`, {
-      headers: this.getHeaders()
-    });
+    return this.http.get<any[]>(`${this.baseUrl}/ingredients`);
   }
 
   getUtensils(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.baseUrl}/utensils`, {
-      headers: this.getHeaders()
-    });
+    return this.http.get<any[]>(`${this.baseUrl}/utensils`);
   }
 
   getTags(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.baseUrl}/tags`, {
-      headers: this.getHeaders()
-    });
+    return this.http.get<any[]>(`${this.baseUrl}/tags`);
   }
 
   editRecipe(id: number, recipeRequest: RecipeRequest): Observable<RecipeResponse> {
-    return this.http.put<RecipeResponse>(`${this.baseUrl}/${id}`, recipeRequest, {
-      headers: this.getHeaders()
-    });
+    return this.http.put<RecipeResponse>(`${this.baseUrl}/${id}`, recipeRequest);
   }
 
   deleteRecipe(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`, {
-      headers: this.getHeaders()
-    });
+    return this.http.delete<void>(`${this.baseUrl}/${id}`);
   }
 
   getAllRecipes(): Observable<RecipeResponse[]> {
@@ -125,8 +112,16 @@ export class RecipeService {
     const formData = new FormData();
     formData.append('file', file);
     formData.append('public_id', `${recipeName}_image`);
-    return this.http.post<{ url: string }>(`${this.baseUrl}/uploadImage`, formData, {
-      headers: this.getHeaders()
+    return this.http.post<{ url: string }>(`${this.baseUrl}/uploadImage`, formData);
+  }
+
+  likeRecipe(userId: number, recipeId: number): Observable<void> {
+    return this.http.post<void>(`${this.baseUrl}/like`, { userId, recipeId });
+  }
+
+  unlikeRecipe(userId: number, recipeId: number): Observable<void> {
+    return this.http.delete<void>(`${this.baseUrl}/like`, {
+      body: { userId, recipeId }
     });
   }
 }

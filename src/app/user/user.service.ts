@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
+import { RecipeResponse } from '../models/recipe.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -109,17 +110,17 @@ export class UserService {
   }
 
   likeRecipe(userId: number, recipeId: number): Observable<void> {
-    return this.http.post<void>(`${this.recipeUrl}/${recipeId}/like`, { userId }, { headers: this.getAuthHeaders() })
-      .pipe(
-        catchError(this.handleError<void>('likeRecipe'))
-      );
+    return this.http.post<void>(`${this.baseUrl}/like`, { userId, recipeId });
   }
 
   unlikeRecipe(userId: number, recipeId: number): Observable<void> {
-    return this.http.post<void>(`${this.recipeUrl}/${recipeId}/unlike`, { userId }, { headers: this.getAuthHeaders() })
-      .pipe(
-        catchError(this.handleError<void>('unlikeRecipe'))
-      );
+    return this.http.request<void>('delete', `${this.baseUrl}/like`, {
+      body: { userId, recipeId }
+    });
+  }
+
+  getFavoriteRecipes(userId: number): Observable<RecipeResponse[]> {
+    return this.http.get<RecipeResponse[]>(`${this.baseUrl}/${userId}/favorites`);
   }
 
   getCurrentUserId(): number | null {

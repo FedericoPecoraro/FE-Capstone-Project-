@@ -2,6 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { UserService } from '../../user/user.service';
 import { AuthService } from '../../auth/auth.service';
 import { RecipeResponse } from '../../models/recipe.interface';
+import { catchError } from 'rxjs/operators';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'app-recipe-card',
@@ -13,6 +15,7 @@ export class RecipeCardComponent implements OnInit {
 
   isUserLoggedIn: boolean = false;
   isAdmin: boolean = false;
+  favoriteRecipes: number[] = []; // Array per memorizzare gli ID delle ricette preferite
 
   constructor(private userSvc: UserService, private authSvc: AuthService) {}
 
@@ -20,7 +23,24 @@ export class RecipeCardComponent implements OnInit {
     this.authSvc.isLoggedIn$.subscribe(data => {
       this.isUserLoggedIn = data;
       this.isAdmin = this.authSvc.isAdmin;
+      if (this.isUserLoggedIn) {
+        this.loadFavoriteRecipes(); // Carica le ricette preferite dell'utente
+      }
     });
+  }
+
+  loadFavoriteRecipes() {
+    const userId = this.userSvc.getCurrentUserId();
+    if (userId) {
+      this.userSvc.getFavoriteRecipes(userId).pipe(
+        catchError(error => {
+          console.error('Error loading favorite recipes:', error);
+          return of([]);
+        })
+      ).subscribe(favorites => {
+        this.favoriteRecipes = favorites.map(fav => fav.id); // Supponiamo che la risposta contenga un array di oggetti ricetta con un campo id
+      });
+    }
   }
 
   toggleFavorite(recipe: RecipeResponse) {
@@ -30,35 +50,29 @@ export class RecipeCardComponent implements OnInit {
         this.userSvc.unlikeRecipe(userId, recipe.id).subscribe(
           () => {
             console.log(`Recipe ${recipe.id} removed from favorites.`);
-            // Aggiungi logica aggiuntiva se necessario dopo la rimozione dai preferiti
+            this.favoriteRecipes = this.favoriteRecipes.filter(id => id !== recipe.id);
           },
           error => {
             console.error('Error removing recipe from favorites:', error);
-            // Gestione degli errori
           }
         );
       } else {
         this.userSvc.likeRecipe(userId, recipe.id).subscribe(
           () => {
             console.log(`Recipe ${recipe.id} added to favorites.`);
-            // Aggiungi logica aggiuntiva se necessario dopo l'aggiunta ai preferiti
+            this.favoriteRecipes.push(recipe.id);
           },
           error => {
             console.error('Error adding recipe to favorites:', error);
-            // Gestione degli errori
           }
         );
       }
     } else {
       console.error('User not authenticated or token invalid.');
-      // Gestione caso in cui l'utente non è autenticato o il token non è valido
     }
   }
 
   isFavorite(recipe: RecipeResponse): boolean {
-    // Implementa la logica per verificare se la ricetta è nei preferiti dell'utente
-    // Potresti usare una logica basata su userId e recipe.id
-    // Ad esempio, controllando se recipe.id è presente nella lista dei preferiti dell'utente corrente
-    return false; // Sostituisci con la tua logica reale
+    return this.favoriteRecipes.includes(recipe.id);
   }
 }

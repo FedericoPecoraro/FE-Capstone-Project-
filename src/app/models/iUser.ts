@@ -1,3 +1,5 @@
+import { IRoles } from "./i-roles";
+
 export interface iUser {
   id:number,
   firstName:string,
@@ -5,5 +7,5 @@ export interface iUser {
   username: string,
   email:string
   password:string
-  admin: boolean
+  roles:IRoles[];
 }
