@@ -15,7 +15,7 @@ export class RecipeCardComponent implements OnInit {
 
   isUserLoggedIn: boolean = false;
   isAdmin: boolean = false;
-  favoriteRecipes: number[] = []; // Array per memorizzare gli ID delle ricette preferite
+  favoriteRecipes: number[] = [];
 
   constructor(private userSvc: UserService, private authSvc: AuthService) {}
 
@@ -24,7 +24,7 @@ export class RecipeCardComponent implements OnInit {
       this.isUserLoggedIn = data;
       this.isAdmin = this.authSvc.isAdmin;
       if (this.isUserLoggedIn) {
-        this.loadFavoriteRecipes(); // Carica le ricette preferite dell'utente
+        this.loadFavoriteRecipes();
       }
     });
   }
@@ -38,7 +38,7 @@ export class RecipeCardComponent implements OnInit {
           return of([]);
         })
       ).subscribe(favorites => {
-        this.favoriteRecipes = favorites.map(fav => fav.id); // Supponiamo che la risposta contenga un array di oggetti ricetta con un campo id
+        this.favoriteRecipes = favorites.map(fav => fav.id);
       });
     }
   }

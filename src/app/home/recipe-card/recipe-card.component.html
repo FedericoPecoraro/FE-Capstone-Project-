@@ -1,9 +1,9 @@
-<!-- Card-->
+<!-- recipe-card.component.html -->
 <div class="card border-0">
   <div class="position-relative text-white">
-
-    <div class="card-img-overlay three"><span class="badge badge-light text-uppercase">{{recipe.user}}</span></div>
-
+    <div class="card-img-overlay three">
+      <span class="badge badge-light text-uppercase">{{recipe.user}}</span>
+    </div>
     <div class="card-smooth-caption">
       <div class="d-flex justify-content-between align-items-center">
         <div class="mr-auto">
@@ -19,14 +19,12 @@
 
   <div class="card-footer">
     <div class="card-btns">
-
       <button class="learn-more" [routerLink]="['/recipe/detail', recipe.id]">
         <span class="circle" aria-hidden="true">
           <span class="icon arrow"></span>
         </span>
         <span class="button-text">Esplora</span>
       </button>
-
 
       <label *ngIf="isUserLoggedIn" class="ui-like">
         <input type="checkbox" [checked]="isFavorite(recipe)" (change)="toggleFavorite(recipe)">
@@ -35,14 +33,11 @@
             <g stroke-width="0" id="SVGRepo_bgCarrier"></g>
             <g stroke-linejoin="round" stroke-linecap="round" id="SVGRepo_tracerCarrier"></g>
             <g id="SVGRepo_iconCarrier">
-              <path
-                d="M20.808,11.079C19.829,16.132,12,20.5,12,20.5s-7.829-4.368-8.808-9.421C2.227,6.1,5.066,3.5,8,3.5a4.444,4.444,0,0,1,4,2,4.444,4.444,0,0,1,4-2C18.934,3.5,21.773,6.1,20.808,11.079Z">
-              </path>
+              <path d="M20.808,11.079C19.829,16.132,12,20.5,12,20.5s-7.829-4.368-8.808-9.421C2.227,6.1,5.066,3.5,8,3.5a4.444,4.444,0,0,1,4,2,4.444,4.444,0,0,1,4-2C18.934,3.5,21.773,6.1,20.808,11.079Z"></path>
             </g>
           </svg>
         </div>
       </label>
     </div>
   </div>
-
 </div>
