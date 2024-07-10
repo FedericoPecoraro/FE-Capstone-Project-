@@ -16,21 +16,6 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  private getAuthHeaders(): HttpHeaders {
-    const token = localStorage.getItem('accessToken');
-    if (token) {
-      return new HttpHeaders({
-        'Authorization': `Bearer ${token}`,
-        'Content-Type': 'application/json'
-      });
-    }
-    return new HttpHeaders({
-      'Content-Type': 'application/json'
-    });
-  }
-
-
-
   login(username: string, password: string): Observable<{ user: iUser; token: string }> {
     return this.http.post<{ user: iUser; token: string }>(`${this.baseUrl}/login`, { username, password }, { headers: this.headers })
       .pipe(
@@ -53,14 +38,14 @@ export class UserService {
   }
 
   deleteUser(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`, { headers: this.getAuthHeaders() })
+    return this.http.delete<void>(`${this.baseUrl}/${id}`)
       .pipe(
         catchError(this.handleError<void>('deleteUser'))
       );
   }
 
   getUserById(id: number): Observable<iUser> {
-    return this.http.get<iUser>(`${this.baseUrl}/${id}`, { headers: this.getAuthHeaders() })
+    return this.http.get<iUser>(`${this.baseUrl}/${id}`)
       .pipe(
         catchError(this.handleError<iUser>('getUserById'))
       );
@@ -69,16 +54,14 @@ export class UserService {
   updateUser(id: number, user: Partial<iUser>): Observable<iUser> {
     console.log('Updating user with ID:', id);
     console.log('User data:', user);
-    return this.http.put<iUser>(`${this.baseUrl}/${id}`, user, { headers: this.getAuthHeaders() })
+    return this.http.put<iUser>(`${this.baseUrl}/${id}`, user)
       .pipe(
         catchError(this.handleError<iUser>('updateUser'))
       );
   }
 
-
-
   getAllUsers(): Observable<iUser[]> {
-    return this.http.get<iUser[]>(this.baseUrl, { headers: this.getAuthHeaders() })
+    return this.http.get<iUser[]>(this.baseUrl)
       .pipe(
         catchError(this.handleError<iUser[]>('getAllUsers', []))
       );
@@ -87,7 +70,7 @@ export class UserService {
   uploadAvatar(id: number, image: File): Observable<string> {
     const formData = new FormData();
     formData.append('image', image);
-    return this.http.post<{ url: string }>(`${this.baseUrl}/${id}/avatar`, formData, { headers: this.getAuthHeaders() })
+    return this.http.post<{ url: string }>(`${this.baseUrl}/${id}/avatar`, formData)
       .pipe(
         map(response => response.url),
         catchError(this.handleError<string>('uploadAvatar'))
@@ -95,7 +78,7 @@ export class UserService {
   }
 
   deleteAvatar(id: number): Observable<string> {
-    return this.http.delete<{ message: string }>(`${this.baseUrl}/${id}/avatar`, { headers: this.getAuthHeaders() })
+    return this.http.delete<{ message: string }>(`${this.baseUrl}/${id}/avatar`)
       .pipe(
         map(response => response.message),
         catchError(this.handleError<string>('deleteAvatar'))
@@ -124,13 +107,12 @@ export class UserService {
   }
 
   getCurrentUserId(): number | null {
-    const token = localStorage.getItem('token');
-    if (token) {
-      // Decodifica il token JWT per ottenere le informazioni sull'utente
-      const tokenPayload = JSON.parse(atob(token.split('.')[1]));
-      return tokenPayload.id; // Supponendo che l'ID dell'utente sia presente nel payload del token
+    const accessData = localStorage.getItem('accessData');
+    if (accessData) {
+      const parsedAccessData = JSON.parse(accessData);
+      return parsedAccessData.id;
     }
-    return null; // Ritorna null se il token non è presente o non è valido
+    return null;
   }
 
   private handleError<T>(operation = 'operation', result?: T) {
