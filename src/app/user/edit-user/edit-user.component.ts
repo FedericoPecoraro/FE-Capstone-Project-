@@ -1,8 +1,10 @@
+// edit-user.component.ts
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { UserService } from '../user.service';
 import { iUser } from '../../models/iUser';
+import { AuthService } from '../../auth/auth.service';
 
 @Component({
   selector: 'app-edit-user',
@@ -11,12 +13,13 @@ import { iUser } from '../../models/iUser';
 })
 export class EditUserComponent implements OnInit {
   editUserForm: FormGroup;
-  userId!: number;
+  currentUser: iUser | null = null;
+  showSuccessBanner = false;
 
   constructor(
     private fb: FormBuilder,
     private userService: UserService,
-    private route: ActivatedRoute,
+    private authSvc: AuthService,
     private router: Router
   ) {
     this.editUserForm = this.fb.group({
@@ -29,38 +32,23 @@ export class EditUserComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const idParam = this.route.snapshot.paramMap.get('id');
-    if (idParam === null) {
-      console.error('Invalid user ID');
-      return;
-    }
-    this.userId = +idParam;
-    if (isNaN(this.userId)) {
-      console.error('Invalid user ID');
-      return;
-    }
-    this.loadUserData();
-  }
-
-
-
-  loadUserData(): void {
-    this.userService.getUserById(this.userId).subscribe(
-      (user: iUser) => {
-        this.editUserForm.patchValue(user);
-      },
-      error => {
-        console.error('Error fetching user data', error);
+    this.authSvc.getCurrentUser().subscribe(user => {
+      this.currentUser = user;
+      if (this.currentUser) {
+        this.editUserForm.patchValue(this.currentUser);
       }
-    );
+    });
   }
 
   onSubmit(): void {
-    if (this.editUserForm.valid) {
-      this.userService.updateUser(this.userId, this.editUserForm.value).subscribe(
+    if (this.editUserForm.valid && this.currentUser) {
+      this.userService.updateUser(this.currentUser.id, this.editUserForm.value).subscribe(
         () => {
           console.log('User updated successfully');
-          this.router.navigate(['/user']); // Naviga alla pagina del profilo utente
+          this.showSuccessBanner = true;
+          setTimeout(() => {
+            this.showSuccessBanner = false;
+          }, 3000);
         },
         error => {
           console.error('Error updating user', error);
@@ -68,5 +56,4 @@ export class EditUserComponent implements OnInit {
       );
     }
   }
-
 }

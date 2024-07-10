@@ -17,6 +17,25 @@
 .logo:hover {
   transform: translateY(-1px);
 }
+.centered-nav-btns {
+  display: flex;
+  gap: 20px;
+}
+
+//Tasto Le Mie Ricette
+.my-recipe {
+  background-color: #fbcb09;
+  color: #212121;
+  padding: 10px 15px;
+  font-size: 15px;
+  font-weight: bold;
+  border: 2px solid transparent;
+  border-radius: 15px;
+}
+.my-recipe:hover {
+  background-color: #ffbb00;
+}
+
 .auth-btns {
   display: flex;
   gap: 20px;
@@ -39,7 +58,70 @@ border-radius: 10px;
   background-color: #c41d00;
 }
 
-.Btn {
+
+.Btn-user {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 45px;
+  height: 45px;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition-duration: .3s;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.199);
+  background-color: #F8CC0E;
+}
+/* plus sign */
+.sign-user {
+  width: 100%;
+  transition-duration: .3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.sign-user svg {
+  width: 17px;
+}
+
+/* text */
+.text-user {
+  position: absolute;
+  right: 0%;
+  width: 0%;
+  opacity: 0;
+  font-size: 1.2em;
+  font-weight: 600;
+  transition-duration: .3s;
+}
+/* hover effect on button width */
+.Btn-user:hover {
+  width: 125px;
+  border-radius: 40px;
+  transition-duration: .3s;
+  background-color: #FFBB00;
+}
+.Btn-user:hover .sign-user {
+  width: 30%;
+  transition-duration: .3s;
+  padding-left: 20px;
+}
+/* hover effect button's text */
+.Btn-user:hover .text-user {
+  opacity: 1;
+  width: 70%;
+  transition-duration: .3s;
+  padding-right: 10px;
+}
+/* button click effect*/
+.Btn-user:active {
+  transform: translate(2px ,2px);
+}
+
+
+.Btn-exit {
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -54,25 +136,23 @@ border-radius: 10px;
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.199);
   background-color: #D84A31;
 }
-
 /* plus sign */
-.sign {
+.sign-exit {
   width: 100%;
   transition-duration: .3s;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-
-.sign svg {
+.sign-exit svg {
   width: 17px;
 }
-
-.sign svg path {
+.sign-exit svg path {
   fill: white;
 }
+
 /* text */
-.text {
+.text-exit {
   position: absolute;
   right: 0%;
   width: 0%;
@@ -83,47 +163,34 @@ border-radius: 10px;
   transition-duration: .3s;
 }
 /* hover effect on button width */
-.Btn:hover {
+.Btn-exit:hover {
   width: 125px;
   border-radius: 40px;
   transition-duration: .3s;
   background-color: #c41d00;
 }
-
-.Btn:hover .sign {
+.Btn-exit:hover .sign-exit {
   width: 30%;
   transition-duration: .3s;
   padding-left: 20px;
 }
 /* hover effect button's text */
-.Btn:hover .text {
+.Btn-exit:hover .text-exit {
   opacity: 1;
   width: 70%;
   transition-duration: .3s;
   padding-right: 10px;
 }
 /* button click effect*/
-.Btn:active {
+.Btn-exit:active {
   transform: translate(2px ,2px);
 }
 
-.centered-nav-btns {
-  display: flex;
-  gap: 20px;
-}
-//Tasto Le Mie Ricette
-.my-recipe {
-  background-color: #fbcb09;
-  color: #212121;
-  padding: 10px 15px;
-  font-size: 15px;
-  font-weight: bold;
-  border: 2px solid transparent;
-  border-radius: 15px;
-}
-.my-recipe:hover {
-  background-color: #ffbb00;
-}
+
+-------
+
+
+
 
 //Tasto Ricette Salutari
 .paste-button {

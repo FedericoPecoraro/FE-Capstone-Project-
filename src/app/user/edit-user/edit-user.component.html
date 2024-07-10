@@ -1,3 +1,4 @@
+<!-- edit-user.component.html -->
 <div class="main-container">
   <div class="container">
     <form class="form" [formGroup]="editUserForm" (ngSubmit)="onSubmit()">
@@ -33,4 +34,9 @@
       <button type="submit" class="submit">Aggiorna</button>
     </form>
   </div>
+</div>
+
+<!-- Success Banner -->
+<div *ngIf="showSuccessBanner" class="success-banner">
+  <p>Dati aggiornati con successo!</p>
 </div>

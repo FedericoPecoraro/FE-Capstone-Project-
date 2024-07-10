@@ -115,6 +115,13 @@ export class UserService {
     return null;
   }
 
+  getLoggedInUser(): Observable<iUser> {
+    return this.http.get<iUser>(`${this.baseUrl}/me`)
+      .pipe(
+        catchError(this.handleError<iUser>('getLoggedInUser'))
+      );
+  }
+
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.error(`${operation} failed: ${error.message}`);
