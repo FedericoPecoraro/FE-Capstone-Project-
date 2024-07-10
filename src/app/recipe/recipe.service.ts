@@ -13,23 +13,6 @@ export class RecipeService {
 
   constructor(private http: HttpClient) { }
 
- // private getHeaders(): HttpHeaders {
-  //  const accessData = localStorage.getItem('accessData');
-    //if (accessData) {
-    //  const parsedAccessData = JSON.parse(accessData);
-    //  const token = parsedAccessData.accessToken;
-    //  return new HttpHeaders({
-    //    'Authorization': `Bearer ${token}`,
-    //    'Content-Type': 'application/json'
-    //  });
-  //  } else {
-  //    return new HttpHeaders({
-  //      'Content-Type': 'application/json'
-  //    });
-  //  }
-//  }
-
-
   createRecipe(recipeRequest: RecipeRequest): Observable<RecipeResponse> {
     return this.http.post<RecipeResponse>(this.baseUrl, recipeRequest);
   }
@@ -65,14 +48,16 @@ export class RecipeService {
 
   getRecipeById(id: number): Observable<RecipeResponse> {
     return this.http.get<RecipeResponse>(`${this.baseUrl}/${id}`, {
-      // Rimuovere l'header di autenticazione se non necessario
       headers: new HttpHeaders({ 'Content-Type': 'application/json' })
     });
-}
+  }
 
+  getRecipesByUser(userId: number): Observable<RecipeResponse[]> {
+    return this.http.get<RecipeResponse[]>(`${this.baseUrl}/user/${userId}/recipes`);
+  }
 
-  getRecipesByUser(username: string): Observable<RecipeResponse[]> {
-    return this.http.get<RecipeResponse[]>(`${this.baseUrl}/user/${username}`);
+  getRecipesByLoggedUser(): Observable<RecipeResponse[]> {
+    return this.http.get<RecipeResponse[]>(`${this.baseUrl}/user/recipes`);
   }
 
   getRecipesByTagId(tagId: number): Observable<RecipeResponse[]> {
@@ -113,15 +98,5 @@ export class RecipeService {
     formData.append('file', file);
     formData.append('public_id', `${recipeName}_image`);
     return this.http.post<{ url: string }>(`${this.baseUrl}/uploadImage`, formData);
-  }
-
-  likeRecipe(userId: number, recipeId: number): Observable<void> {
-    return this.http.post<void>(`${this.baseUrl}/like`, { userId, recipeId });
-  }
-
-  unlikeRecipe(userId: number, recipeId: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/like`, {
-      body: { userId, recipeId }
-    });
   }
 }

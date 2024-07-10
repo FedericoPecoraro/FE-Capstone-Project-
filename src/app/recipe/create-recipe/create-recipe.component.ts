@@ -20,6 +20,7 @@ export class CreateRecipeComponent implements OnInit {
   utensils: any[] = [];
   tags: any[] = [];
   currentUser: iUser | null = null;
+  showBanner: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -107,14 +108,14 @@ export class CreateRecipeComponent implements OnInit {
         ...this.recipeForm.value,
         userId: this.currentUser.id
       };
-      console.log(this.currentUser.id);
-
-      console.log(this.recipeForm.value);
 
       this.recipeService.createRecipe(recipeRequest).pipe(
         tap(response => {
           console.log('Ricetta creata con successo:', response);
-          // Aggiungi logica aggiuntiva se necessario dopo la creazione della ricetta
+          this.showBanner = true;
+          setTimeout(() => {
+            this.showBanner = false;
+          }, 5000);
         }),
         catchError(error => {
           console.error('Errore durante la creazione della ricetta:', error);

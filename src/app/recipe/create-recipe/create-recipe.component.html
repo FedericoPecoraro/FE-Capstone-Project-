@@ -1,5 +1,8 @@
 <div class="main-container">
   <div class="container">
+    <div *ngIf="showBanner" class="alert alert-success" role="alert">
+      Ricetta creata con successo!
+    </div>
     <form [formGroup]="recipeForm" (ngSubmit)="onSubmit()" class="form">
       <p class="title">Crea Ricetta</p>
       <p class="message">Crea la tua Ricetta Unica!</p>
