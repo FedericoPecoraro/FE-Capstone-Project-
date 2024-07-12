@@ -9,7 +9,7 @@
 
       <label>
         <input class="input" type="text" formControlName="title" required>
-        <span>Nome Ricetta</span>
+        <span>Titolo</span>
       </label>
 
       <label>
@@ -20,11 +20,11 @@
       <div class="row">
         <label class="col">
           <input class="input" type="number" formControlName="preparationTime" required>
-          <span>Tempo di Preparazione (minuti)</span>
+          <span class="time">Tempo di Preparazione (minuti)</span>
         </label>
         <label class="col">
           <input class="input" type="number" formControlName="cookingTime" required>
-          <span>Tempo di Cottura (minuti)</span>
+          <span class="time">Tempo di Cottura (minuti)</span>
         </label>
       </div>
 
@@ -48,11 +48,15 @@
         </div>
       </div>
 
-      <div class="checkbox-group">
-        <label *ngFor="let tag of tags" class="checkbox-inline">
-          <input type="checkbox" [value]="tag.id" (change)="onTagChange($event)">
-          {{tag.name}}
-        </label>
+      <div class="checkbox-group customCheckBoxHolder">
+        <div *ngFor="let tag of tags">
+          <input class="customCheckBoxInput" [id]="'tag' + tag.id" type="checkbox" [value]="tag.id" (change)="onTagChange($event)">
+          <label class="customCheckBoxWrapper" [for]="'tag' + tag.id">
+            <div class="customCheckBox">
+              <div class="inner">{{tag.name}}</div>
+            </div>
+          </label>
+        </div>
       </div>
 
       <button class="submit" type="submit" [disabled]="!recipeForm.valid">Salva</button>

@@ -1,5 +1,39 @@
 <div class="recipe-title d-flex justify-content-center mt-4">
-  <h3>
-    Tutte le Ricette Vegetariane:
-  </h3>
+  <h3>Tutte le Ricette Vegetariane:</h3>
+</div>
+
+<div class="row g-5 px-0 mx-0 mt-2 mb-5">
+  <div class="d-flex flex-wrap justify-content-center">
+    <div *ngFor="let recipe of recipes" class="col-12 col-sm-6 col-md-4 col-lg-3 m-2">
+      <div class="card border-0">
+        <div class="position-relative text-white">
+          <div class="card-img-overlay three">
+            <span class="badge badge-light text-uppercase">{{recipe.user?.username}}</span>
+          </div>
+          <div class="card-smooth-caption">
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="mr-auto">
+                <h5 class="card-title text-white">{{recipe.title}}</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-body">
+          <p class="card-text">{{recipe.description}}</p>
+        </div>
+
+        <div class="card-footer">
+          <div class="card-btns">
+            <button class="learn-more" [routerLink]="['/recipe/detail', recipe.id]">
+              <span class="circle" aria-hidden="true">
+                <span class="icon arrow"></span>
+              </span>
+              <span class="button-text">Esplora</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
