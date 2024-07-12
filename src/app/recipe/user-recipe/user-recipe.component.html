@@ -1,41 +1,99 @@
-<div class="recipe-title d-flex justify-content-center mt-4">
+<div class="recipe-title d-flex justify-content-center mt-5">
   <h3>Le tue Ricette:</h3>
 </div>
 
-<div class="d-flex justify-content-center flex-wrap">
-  <div *ngFor="let recipe of createdRecipes" class="m-2">
-    <div class="card border-0">
-      <div class="position-relative text-white">
-        <div class="card-img-overlay three">
-          <span class="badge badge-light text-uppercase">{{recipe.user}}</span>
-        </div>
-        <div class="card-smooth-caption">
-          <div class="d-flex justify-content-between align-items-center">
-            <div class="mr-auto">
-              <h5 class="card-title text-white">{{recipe.title}}</h5>
+<div class="carousel-container position-relative">
+  <button class="carousel-control-prev" type="button" (click)="carousel.prev()">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+
+  <ngb-carousel #carousel class="mb-5 settCar d-flex align-items-center justify-content-center" [interval]="0" [wrap]="true" [keyboard]="true" [showNavigationIndicators]="true">
+    <ng-template ngbSlide *ngFor="let group of createdRecipesGrouped">
+      <div class="carousel-item d-flex justify-content-around">
+        <div *ngFor="let recipe of group" class="card border-0 m-2" style="width: 30%;">
+          <div class="position-relative text-white">
+            <div class="card-img-overlay three">
+              <span class="badge badge-light text-uppercase">{{ recipe.user?.username }}</span>
+            </div>
+            <div class="card-smooth-caption">
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="mr-auto">
+                  <h5 class="card-title text-white">{{ recipe.title }}</h5>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <p class="card-text">{{ recipe.description }}</p>
+          </div>
+          <div class="card-footer">
+            <div class="card-btns">
+              <button class="learn-more" [routerLink]="['/recipe/detail', recipe.id]">
+                <span class="circle" aria-hidden="true">
+                  <span class="icon arrow"></span>
+                </span>
+                <span class="button-text">Esplora</span>
+              </button>
             </div>
           </div>
         </div>
       </div>
+    </ng-template>
+  </ngb-carousel>
 
-      <div class="card-body">
-        <p class="card-text">{{recipe.description}}</p>
-      </div>
-
-      <div class="card-footer">
-        <div class="card-btns">
-          <button class="learn-more" [routerLink]="['/recipe/detail', recipe.id]">
-            <span class="circle" aria-hidden="true">
-              <span class="icon arrow"></span>
-            </span>
-            <span class="button-text">Esplora</span>
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
+  <button class="carousel-control-next" type="button" (click)="carousel.next()">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
 </div>
 
-<div class="recipe-title d-flex justify-content-center mt-4">
+<div class="recipe-title d-flex justify-content-center mt-5">
   <h3>Ricette Preferite:</h3>
+</div>
+
+<div class="carousel-container position-relative">
+  <button class="carousel-control-prev" type="button" (click)="favCarousel.prev()">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+
+  <ngb-carousel #favCarousel class="mb-5 settCar d-flex align-items-center justify-content-center" [interval]="0" [wrap]="true" [keyboard]="true" [showNavigationIndicators]="true">
+    <ng-template ngbSlide *ngFor="let group of favoriteRecipesGrouped">
+      <div class="carousel-item d-flex justify-content-around">
+        <div *ngFor="let recipe of group" class="card border-0 m-2" style="width: 30%;">
+          <div class="position-relative text-white">
+            <div class="card-img-overlay three">
+              <span class="badge badge-light text-uppercase">{{ recipe.user?.username }}</span>
+            </div>
+            <div class="card-smooth-caption">
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="mr-auto">
+                  <h5 class="card-title text-white">{{ recipe.title }}</h5>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <p class="card-text">{{ recipe.description }}</p>
+          </div>
+          <div class="card-footer">
+            <div class="card-btns">
+              <button class="learn-more" [routerLink]="['/recipe/detail', recipe.id]">
+                <span class="circle" aria-hidden="true">
+                  <span class="icon arrow"></span>
+                </span>
+                <span class="button-text">Esplora</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </ngb-carousel>
+
+  <button class="carousel-control-next" type="button" (click)="favCarousel.next()">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
 </div>

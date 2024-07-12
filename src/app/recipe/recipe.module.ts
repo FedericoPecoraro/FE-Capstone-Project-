@@ -10,6 +10,7 @@ import { DetailRecipeComponent } from './detail-recipe/detail-recipe.component';
 import { CreateRecipeComponent } from './create-recipe/create-recipe.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { HttpClientModule } from '@angular/common/http';
     RecipeRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgbCarouselModule
   ]
 })
 export class RecipeModule { }

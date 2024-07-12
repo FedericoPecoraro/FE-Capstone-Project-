@@ -77,12 +77,9 @@ export class AuthService {
 
   getAccessToken(): string {
     const userJson = localStorage.getItem('accessData');
-
     if (!userJson) return '';
-
     const accessData: AccessData = JSON.parse(userJson);
     if (this.jwtHelper.isTokenExpired(accessData.token)) return '';
-
     return accessData.token;
   }
 

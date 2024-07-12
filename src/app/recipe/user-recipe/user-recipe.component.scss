@@ -293,9 +293,6 @@ button:hover .button-text {
   color: #fff;
 }
 
-
-
-
 //Like Button
 
 .ui-like {
@@ -503,4 +500,37 @@ button:hover .button-text {
 .card-btns {
   display: flex;
   justify-content: space-between;
+}
+
+.settCar {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.carousel-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.carousel-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.carousel-control-prev, .carousel-control-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+}
+
+.carousel-control-prev {
+  left: -50px; /* Adjust as needed */
+}
+
+.carousel-control-next {
+  right: -50px; /* Adjust as needed */
 }

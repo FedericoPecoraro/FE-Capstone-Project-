@@ -15,13 +15,14 @@ export interface RecipeRequest {
 }
 
 export interface RecipeResponse {
-  id:              number;
-  title:           string;
-  description:     string;
+  id: number;
+  title: string;
+  description: string;
   preparationTime: number;
-  cookingTime:     number;
-  user:            iUser;
-  ingredients:     IIngredientResponse[];
-  utensils:        IUtensilResponse[];
-  tags:            ITagResponse[];
+  cookingTime: number;
+  user: iUser;
+  ingredients: IIngredientResponse[];
+  utensils: IUtensilResponse[];
+  tags: ITagResponse[];
+  likedByUsers: iUser[];
 }

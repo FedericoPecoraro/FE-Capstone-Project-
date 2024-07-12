@@ -93,6 +93,8 @@ export class UserService {
   }
 
   likeRecipe(userId: number, recipeId: number): Observable<void> {
+    console.log(userId, recipeId);
+
     return this.http.post<void>(`${this.baseUrl}/like`, { userId, recipeId });
   }
 
@@ -102,15 +104,18 @@ export class UserService {
     });
   }
 
-  getFavoriteRecipes(userId: number): Observable<RecipeResponse[]> {
-    return this.http.get<RecipeResponse[]>(`${this.baseUrl}/${userId}/favorites`);
-  }
+getFavoriteRecipes(userId: number | null): Observable<RecipeResponse[]> {
+  return this.http.get<RecipeResponse[]>(`${this.baseUrl}/${userId}/favorites`)
+    .pipe(
+      catchError(this.handleError<RecipeResponse[]>('getFavoriteRecipes', []))
+    );
+}
 
   getCurrentUserId(): number | null {
     const accessData = localStorage.getItem('accessData');
     if (accessData) {
       const parsedAccessData = JSON.parse(accessData);
-      return parsedAccessData.id;
+      return parsedAccessData.user.id;
     }
     return null;
   }

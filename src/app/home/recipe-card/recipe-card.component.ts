@@ -1,9 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { RecipeResponse } from '../../models/recipe.interface';
 import { UserService } from '../../user/user.service';
 import { AuthService } from '../../auth/auth.service';
-import { RecipeResponse } from '../../models/recipe.interface';
-import { catchError } from 'rxjs/operators';
-import { of } from 'rxjs';
 
 @Component({
   selector: 'app-recipe-card',
@@ -32,14 +30,14 @@ export class RecipeCardComponent implements OnInit {
   loadFavoriteRecipes() {
     const userId = this.userSvc.getCurrentUserId();
     if (userId) {
-      this.userSvc.getFavoriteRecipes(userId).pipe(
-        catchError(error => {
+      this.userSvc.getFavoriteRecipes(userId).subscribe(
+        recipes => {
+          this.favoriteRecipes = recipes.map(recipe => recipe.id);
+        },
+        error => {
           console.error('Error loading favorite recipes:', error);
-          return of([]);
-        })
-      ).subscribe(favorites => {
-        this.favoriteRecipes = favorites.map(fav => fav.id);
-      });
+        }
+      );
     }
   }
 
@@ -51,6 +49,8 @@ export class RecipeCardComponent implements OnInit {
           () => {
             console.log(`Recipe ${recipe.id} removed from favorites.`);
             this.favoriteRecipes = this.favoriteRecipes.filter(id => id !== recipe.id);
+            console.log(this.favoriteRecipes);
+
           },
           error => {
             console.error('Error removing recipe from favorites:', error);
@@ -61,6 +61,8 @@ export class RecipeCardComponent implements OnInit {
           () => {
             console.log(`Recipe ${recipe.id} added to favorites.`);
             this.favoriteRecipes.push(recipe.id);
+            console.log(this.favoriteRecipes);
+
           },
           error => {
             console.error('Error adding recipe to favorites:', error);

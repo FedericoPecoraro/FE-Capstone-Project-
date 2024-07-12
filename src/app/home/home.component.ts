@@ -1,3 +1,4 @@
+import { UserService } from './../user/user.service';
 import { Component, OnInit } from '@angular/core';
 import { RecipeService } from '../recipe/recipe.service';
 import { RecipeResponse } from '../models/recipe.interface';
@@ -14,8 +15,9 @@ export class HomeComponent implements OnInit {
   searchedRecipes: RecipeResponse[] = []; // Array per memorizzare le ricette trovate durante la ricerca
   isUserLoggedIn: boolean = false;
   isAdmin: boolean = false;
+  favoriteRecipes: RecipeResponse[] = [];
 
-  constructor(private recipeService: RecipeService, private authSvc: AuthService) { }
+  constructor(private recipeService: RecipeService, private authSvc: AuthService, private UserService: UserService) { }
 
   ngOnInit(): void {
     // Controllo dello stato dell'utente loggato

@@ -102,6 +102,19 @@ export class CreateRecipeComponent implements OnInit {
     ).subscribe();
   }
 
+  onTagChange(event: any): void {
+    const tagIds = this.recipeForm.get('tagIds')?.value || [];
+    if (event.target.checked) {
+      tagIds.push(event.target.value);
+    } else {
+      const index = tagIds.indexOf(event.target.value);
+      if (index >= 0) {
+        tagIds.splice(index, 1);
+      }
+    }
+    this.recipeForm.get('tagIds')?.setValue(tagIds);
+  }
+
   onSubmit(): void {
     if (this.recipeForm.valid && this.currentUser) {
       const recipeRequest: RecipeRequest = {

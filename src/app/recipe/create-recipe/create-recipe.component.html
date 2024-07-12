@@ -17,36 +17,43 @@
         <span>Descrizione</span>
       </label>
 
-      <label>
-        <input class="input" type="number" formControlName="preparationTime" required>
-        <span>Tempo di Preparazione (minuti)</span>
-      </label>
+      <div class="row">
+        <label class="col">
+          <input class="input" type="number" formControlName="preparationTime" required>
+          <span>Tempo di Preparazione (minuti)</span>
+        </label>
+        <label class="col">
+          <input class="input" type="number" formControlName="cookingTime" required>
+          <span>Tempo di Cottura (minuti)</span>
+        </label>
+      </div>
 
-      <label>
-        <input class="input" type="number" formControlName="cookingTime" required>
-        <span>Tempo di Cottura (minuti)</span>
-      </label>
+      <div class="row">
+        <div class="col">
+          <label class="dropdown-label">
+            <span>Ingredienti</span>
+            <select formControlName="ingredientIds" multiple class="dropdown-select">
+              <option *ngFor="let ingredient of ingredients" [value]="ingredient.id">{{ingredient.name}}</option>
+            </select>
+          </label>
+        </div>
 
-      <label>
-        <select formControlName="ingredientIds" multiple>
-          <option *ngFor="let ingredient of ingredients" [value]="ingredient.id">{{ingredient.name}}</option>
-        </select>
-        <span>Ingredienti</span>
-      </label>
+        <div class="col">
+          <label class="dropdown-label">
+            <span>Utensili</span>
+            <select formControlName="utensilIds" multiple class="dropdown-select">
+              <option *ngFor="let utensil of utensils" [value]="utensil.id">{{utensil.name}}</option>
+            </select>
+          </label>
+        </div>
+      </div>
 
-      <label>
-        <select formControlName="utensilIds" multiple>
-          <option *ngFor="let utensil of utensils" [value]="utensil.id">{{utensil.name}}</option>
-        </select>
-        <span>Utensili</span>
-      </label>
-
-      <label>
-        <select formControlName="tagIds" multiple>
-          <option *ngFor="let tag of tags" [value]="tag.id">{{tag.name}}</option>
-        </select>
-        <span>Tag</span>
-      </label>
+      <div class="checkbox-group">
+        <label *ngFor="let tag of tags" class="checkbox-inline">
+          <input type="checkbox" [value]="tag.id" (change)="onTagChange($event)">
+          {{tag.name}}
+        </label>
+      </div>
 
       <button class="submit" type="submit" [disabled]="!recipeForm.valid">Salva</button>
     </form>
