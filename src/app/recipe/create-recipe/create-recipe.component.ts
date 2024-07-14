@@ -20,7 +20,8 @@ export class CreateRecipeComponent implements OnInit {
   utensils: any[] = [];
   tags: any[] = [];
   currentUser: iUser | null = null;
-  showBanner: boolean = false;
+  showSuccessBanner: boolean = false;
+  showErrorBanner: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -115,6 +116,38 @@ export class CreateRecipeComponent implements OnInit {
     this.recipeForm.get('tagIds')?.setValue(tagIds);
   }
 
+  toggleIngredientSelection(ingredientId: number): void {
+    const ingredientIds = this.recipeForm.get('ingredientIds')?.value || [];
+    const index = ingredientIds.indexOf(ingredientId);
+    if (index >= 0) {
+      ingredientIds.splice(index, 1);
+    } else {
+      ingredientIds.push(ingredientId);
+    }
+    this.recipeForm.get('ingredientIds')?.setValue(ingredientIds);
+  }
+
+  toggleUtensilSelection(utensilId: number): void {
+    const utensilIds = this.recipeForm.get('utensilIds')?.value || [];
+    const index = utensilIds.indexOf(utensilId);
+    if (index >= 0) {
+      utensilIds.splice(index, 1);
+    } else {
+      utensilIds.push(utensilId);
+    }
+    this.recipeForm.get('utensilIds')?.setValue(utensilIds);
+  }
+
+  isIngredientSelected(ingredientId: number): boolean {
+    const ingredientIds = this.recipeForm.get('ingredientIds')?.value || [];
+    return ingredientIds.indexOf(ingredientId) >= 0;
+  }
+
+  isUtensilSelected(utensilId: number): boolean {
+    const utensilIds = this.recipeForm.get('utensilIds')?.value || [];
+    return utensilIds.indexOf(utensilId) >= 0;
+  }
+
   onSubmit(): void {
     if (this.recipeForm.valid && this.currentUser) {
       const recipeRequest: RecipeRequest = {
@@ -125,9 +158,9 @@ export class CreateRecipeComponent implements OnInit {
       this.recipeService.createRecipe(recipeRequest).pipe(
         tap(response => {
           console.log('Ricetta creata con successo:', response);
-          this.showBanner = true;
+          this.showSuccessBanner = true;
           setTimeout(() => {
-            this.showBanner = false;
+            this.showSuccessBanner = false;
           }, 5000);
         }),
         catchError(error => {
@@ -135,6 +168,11 @@ export class CreateRecipeComponent implements OnInit {
           return of(null);
         })
       ).subscribe();
+    } else {
+      this.showErrorBanner = true;
+      setTimeout(() => {
+        this.showErrorBanner = false;
+      }, 5000);
     }
   }
 }

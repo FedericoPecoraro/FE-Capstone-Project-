@@ -28,12 +28,6 @@
   border-top: 0;
 }
 
-.card-cup,
-.card-img {
-  border-top-right-radius: 0.8rem;
-  border-top-left-radius: 0.8rem;
-}
-
 .card > hr {
   margin-right: 0;
   margin-left: 0;
@@ -49,15 +43,6 @@
   line-height: 1.5;
   margin-bottom: 0.5rem;
   font-size: 20px;
-  font-family: Roboto;
-  font-weight: 500;
-  font-style: normal;
-}
-
-.badge-warning2,
-.text-muted,
-.read-more {
-  font-family: Roboto, sans-serif !important;
 }
 
 .card-subtitle,
@@ -131,12 +116,11 @@
 p.card-text,
 .secondary {
   font-size: 16px;
-  font-weight: 400;
+  font-weight: bold;
   font-style: normal;
   opacity: 0.75;
   line-height: 25px;
   text-overflow: clip;
-  font-family: source sans pro;
   display: -webkit-box;
   -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;
@@ -188,7 +172,6 @@ span.badge.badge-light {
     -0.85px -0.35px 0.85px 0 rgb(201 149 135 / 55%),
     -1.25px -1.25px 1.65px 0 rgb(201 149 135 / 25%);
   border-radius: 4px;
-  font-family: Roboto;
   color: #fff;
 }
 
@@ -293,6 +276,14 @@ button:hover .button-text {
   color: #fff;
 }
 
+@media (max-width: 1210px) {
+  button.learn-more .button-text {
+    display: none;
+  }
+  button:hover .circle {
+    width: 40%;
+  }
+}
 
 
 
@@ -336,6 +327,7 @@ button:hover .button-text {
   -webkit-transform-origin: top;
   -ms-transform-origin: top;
   transform-origin: top;
+  margin-top: 8px;
 }
 
 .like::after {

@@ -52,18 +52,22 @@
   justify-content: center;
 }
 
+.alert-success {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.alert-error {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
 .message,
 .signin {
   font-size: 14.5px;
   color: rgba(255, 255, 255, 0.7);
-}
-
-.signin {
-  text-align: center;
-}
-
-.signin a:hover {
-  text-decoration: underline #c41d00;
 }
 
 .form label {
@@ -106,8 +110,13 @@
 .input {
   font-size: medium;
 }
+
 .time {
-  margin-left: 9px;}
+  display: block;
+  text-align: left;
+  margin-top: 5px;
+  margin-left: 10px;
+}
 
 .submit {
   border: none;
@@ -124,36 +133,79 @@
   background-color: #6eac4f;
 }
 
-@keyframes pulse {
-  from {
-    transform: scale(0.9);
-    opacity: 1;
-  }
-
-  to {
-    transform: scale(1.8);
-    opacity: 0;
-  }
-}
-
 .dropdown-label {
   display: block;
   text-align: left;
   margin-bottom: 10px;
 }
 
-.dropdown-select {
-  width: 100%;
-  padding: 10px;
+.dropdown-list {
+  max-height: 150px;
+  overflow-y: auto;
   border-radius: 10px;
-  border: 1px solid #333;
+  border: 1px solid rgba(105, 105, 105, 0.397);
   background-color: #333;
   color: #fff;
+  border-radius: 10px;
 }
 
+.dropdown-item {
+  padding: 10px;
+  cursor: pointer;
+  border-bottom: 1px solid #555;
+}
 
-//Checkbox
+.dropdown-item:last-child {
+  border-bottom: none;
+}
 
+.dropdown-item:hover {
+  background-color: #6f6f6f;
+}
+
+.dropdown-item.selected {
+  background-color: #6eac4f;
+}
+
+.dropdown-list::-webkit-scrollbar {
+  width: 4px;
+}
+
+.dropdown-list::-webkit-scrollbar-track {
+  background: none;
+}
+
+.dropdown-list::-webkit-scrollbar-thumb {
+  background: #555;
+  border-radius: 30px;
+}
+
+.dropdown-list::-webkit-scrollbar-thumb:hover {
+  background: #777;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  width: 4px;
+  height: 4px;
+  background: #555;
+}
+
+input[type="number"]::-webkit-inner-spin-button:hover,
+input[type="number"]::-webkit-outer-spin-button:hover {
+  background: #777;
+}
+
+/* Checkbox */
 .customCheckBoxHolder {
   margin: 5px;
   display: flex;
@@ -170,7 +222,7 @@
   user-select: none;
   padding: 2px 8px;
   background-color: rgba(0, 0, 0, 0.16);
-  border-radius: 0px;
+  border-radius: 20px;
   color: rgba(255, 255, 255, 0.7);
   transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
   transition-duration: 300ms;
@@ -182,6 +234,7 @@
   outline: none;
   justify-content: center;
   min-width: 55px;
+  border: 1px solid #333;
 }
 
 .customCheckBox:hover {
@@ -205,14 +258,14 @@
 }
 
 .customCheckBoxWrapper:first-of-type .customCheckBox {
-  border-bottom-left-radius: 5px;
-  border-top-left-radius: 5px;
+  border-bottom-left-radius: 20px;
+  border-top-left-radius: 20px;
   border-right: 0px;
 }
 
 .customCheckBoxWrapper:last-of-type .customCheckBox {
-  border-bottom-right-radius: 5px;
-  border-top-right-radius: 5px;
+  border-bottom-right-radius: 20px;
+  border-top-right-radius: 20px;
   border-left: 0px;
 }
 

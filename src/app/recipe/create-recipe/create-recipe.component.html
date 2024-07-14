@@ -1,10 +1,15 @@
 <div class="main-container">
   <div class="container">
-    <div *ngIf="showBanner" class="alert alert-success" role="alert">
+    <div *ngIf="showSuccessBanner" class="alert alert-success" role="alert">
       Ricetta creata con successo!
     </div>
+
+    <div *ngIf="showErrorBanner" class="alert alert-error" role="alert">
+      Inserire tutti i campi!
+    </div>
+
     <form [formGroup]="recipeForm" (ngSubmit)="onSubmit()" class="form">
-      <p class="title">Crea Ricetta</p>
+      <p class="title mx-auto">Crea Ricetta</p>
       <p class="message">Crea la tua Ricetta Unica!</p>
 
       <label>
@@ -20,30 +25,42 @@
       <div class="row">
         <label class="col">
           <input class="input" type="number" formControlName="preparationTime" required>
-          <span class="time">Tempo di Preparazione (minuti)</span>
+          <span class="time">Tempo di Preparazione</span>
         </label>
         <label class="col">
           <input class="input" type="number" formControlName="cookingTime" required>
-          <span class="time">Tempo di Cottura (minuti)</span>
+          <span class="time">Tempo di Cottura</span>
         </label>
       </div>
 
       <div class="row">
         <div class="col">
           <label class="dropdown-label">
-            <span>Ingredienti</span>
-            <select formControlName="ingredientIds" multiple class="dropdown-select">
-              <option *ngFor="let ingredient of ingredients" [value]="ingredient.id">{{ingredient.name}}</option>
-            </select>
+            <span class="ms-2">Ingredienti</span>
+            <div class="dropdown-list">
+              <div
+                *ngFor="let ingredient of ingredients"
+                (click)="toggleIngredientSelection(ingredient.id)"
+                class="dropdown-item"
+                [class.selected]="isIngredientSelected(ingredient.id)">
+                {{ingredient.name}}
+              </div>
+            </div>
           </label>
         </div>
 
         <div class="col">
           <label class="dropdown-label">
-            <span>Utensili</span>
-            <select formControlName="utensilIds" multiple class="dropdown-select">
-              <option *ngFor="let utensil of utensils" [value]="utensil.id">{{utensil.name}}</option>
-            </select>
+            <span class="ms-2">Utensili</span>
+            <div class="dropdown-list">
+              <div
+                *ngFor="let utensil of utensils"
+                (click)="toggleUtensilSelection(utensil.id)"
+                class="dropdown-item"
+                [class.selected]="isUtensilSelected(utensil.id)">
+                {{utensil.name}}
+              </div>
+            </div>
           </label>
         </div>
       </div>
