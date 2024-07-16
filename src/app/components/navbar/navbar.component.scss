@@ -3,16 +3,16 @@
   top: 0;
   z-index: 1000;
   height: 4.5rem;
-  background-color: #fff8e6;
-  border-bottom: 1px solid black;
+  background-color: #fef8eb;
   padding: 0 8%;
   font-size: 15px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
   transition-property: background-color;
   transition-duration: 0.8s;
 }
 .logo {
   width: 200px;
-  transition: transform 0.2s ease
+  transition: transform 0.2s ease;
 }
 .logo:hover {
   transform: translateY(-1px);
@@ -24,40 +24,52 @@
 
 //Tasto Le Mie Ricette
 .my-recipe {
-  background-color: #fbcb09;
+  background-color: #A8D899;
   color: #212121;
   padding: 10px 15px;
   font-size: 15px;
   font-weight: bold;
   border: 2px solid transparent;
-  border-radius: 15px;
+  border-radius: 50px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
 }
 .my-recipe:hover {
-  background-color: #ffbb00;
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15), 0 0 15px rgba(255, 255, 255, 0.3);
+}
+.my-recipe:active {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transform: translateY(2px);
 }
 
 .auth-btns {
   display: flex;
   gap: 20px;
 }
+
 .btn-login {
-background-color: #aed69a;
-font-weight: bold;
-border-radius: 10px;
+  background-color: #aad897;
+  color: #333333;
+  font-weight: bold;
+  border-radius: 50px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
 }
 .btn-login:hover {
-  background-color: #8cca6c;
-}
-.btn-register {
-    background-color: #D84A31;
-    color: white;
-    font-weight: bold;
-    border-radius: 10px;
-}
-.btn-register:hover {
-  background-color: #c41d00;
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15), 0 0 15px rgba(255, 255, 255, 0.3);
 }
 
+.btn-register {
+  background-color: #da4935;
+  color: white;
+  font-weight: bold;
+  border-radius: 50px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+}
+.btn-register:hover {
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15), 0 0 15px rgba(255, 255, 255, 0.3);
+}
 
 .Btn-user {
   display: flex;
@@ -70,14 +82,15 @@ border-radius: 10px;
   cursor: pointer;
   position: relative;
   overflow: hidden;
-  transition-duration: .3s;
+  transition-duration: 0.3s;
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.199);
-  background-color: #F8CC0E;
+  background-color: #A8D899;
 }
+
 /* plus sign */
 .sign-user {
   width: 100%;
-  transition-duration: .3s;
+  transition-duration: 0.3s;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -94,32 +107,27 @@ border-radius: 10px;
   opacity: 0;
   font-size: 1.2em;
   font-weight: 600;
-  transition-duration: .3s;
+  transition-duration: 0.3s;
 }
-/* hover effect on button width */
 .Btn-user:hover {
   width: 125px;
   border-radius: 40px;
-  transition-duration: .3s;
-  background-color: #FFBB00;
+  transition-duration: 0.3s;
 }
 .Btn-user:hover .sign-user {
-  width: 30%;
-  transition-duration: .3s;
+  width: 40%;
+  transition-duration: 0.3s;
   padding-left: 20px;
 }
-/* hover effect button's text */
 .Btn-user:hover .text-user {
   opacity: 1;
   width: 70%;
-  transition-duration: .3s;
+  transition-duration: 0.3s;
   padding-right: 10px;
 }
-/* button click effect*/
 .Btn-user:active {
-  transform: translate(2px ,2px);
+  transform: translate(2px, 2px);
 }
-
 
 .Btn-exit {
   display: flex;
@@ -132,14 +140,13 @@ border-radius: 10px;
   cursor: pointer;
   position: relative;
   overflow: hidden;
-  transition-duration: .3s;
+  transition-duration: 0.3s;
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.199);
-  background-color: #D84A31;
+  background-color: #d84a31;
 }
-/* plus sign */
 .sign-exit {
   width: 100%;
-  transition-duration: .3s;
+  transition-duration: 0.3s;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -150,7 +157,6 @@ border-radius: 10px;
 .sign-exit svg path {
   fill: white;
 }
-
 /* text */
 .text-exit {
   position: absolute;
@@ -160,43 +166,34 @@ border-radius: 10px;
   color: white;
   font-size: 1.2em;
   font-weight: 600;
-  transition-duration: .3s;
+  transition-duration: 0.3s;
 }
-/* hover effect on button width */
 .Btn-exit:hover {
   width: 125px;
   border-radius: 40px;
-  transition-duration: .3s;
-  background-color: #c41d00;
+  transition-duration: 0.3s;
 }
 .Btn-exit:hover .sign-exit {
-  width: 30%;
-  transition-duration: .3s;
+  width: 40%;
+  transition-duration: 0.3s;
   padding-left: 20px;
 }
-/* hover effect button's text */
 .Btn-exit:hover .text-exit {
   opacity: 1;
   width: 70%;
-  transition-duration: .3s;
+  transition-duration: 0.3s;
   padding-right: 10px;
 }
-/* button click effect*/
 .Btn-exit:active {
-  transform: translate(2px ,2px);
+  transform: translate(2px, 2px);
 }
-
-
--------
-
-
 
 
 //Tasto Ricette Salutari
 .paste-button {
   position: relative;
   display: block;
-  font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Verdana, sans-serif;
 }
 .button {
   background-color: #fbcb09;
@@ -205,22 +202,25 @@ border-radius: 10px;
   font-size: 15px;
   font-weight: bold;
   border: 2px solid transparent;
-  border-radius: 15px;
+  border-radius: 50px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
   cursor: pointer;
 }
 .dropdown-content {
   display: none;
-  font-size: 13px;
+  font-size: 14px;
+  font-weight: bold;
   position: absolute;
   z-index: 1;
   min-width: 200px;
-  background-color: #212121;
+  background-color: #FEF8EB;
   border: 2px solid #fbcb09;
   border-radius: 0px 15px 15px 15px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
 }
 .dropdown-content a {
-  color: #fbcb09;
+  color: #333333;
   padding: 8px 10px;
   text-decoration: none;
   display: block;
@@ -232,7 +232,7 @@ border-radius: 10px;
 }
 .dropdown-content a:focus {
   background-color: #212121;
-  color: #4CAF50;
+  color: #4caf50;
 }
 .dropdown-content #top:hover {
   border-radius: 0px 13px 0px 0px;

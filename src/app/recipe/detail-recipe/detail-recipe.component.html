@@ -1,5 +1,7 @@
-<div class="recipe-detail" *ngIf="recipe">
-  <h1>{{ recipe.title }}</h1>
+<div class="recipe-div">
+
+  <div class="recipe-detail" *ngIf="recipe">
+    <h1>{{ recipe.title }}</h1>
   <p>{{ recipe.description }}</p>
   <p><strong>Tempo di Preparazione:</strong> {{ recipe.preparationTime }} minuti</p>
   <p><strong>Tempo di Cottura:</strong> {{ recipe.cookingTime }} minuti</p>
@@ -31,8 +33,10 @@
     </ul>
   </div>
 
-  <div>
+  <div class="user">
     <h2>Creato da</h2>
     <p>{{ recipe.user?.username }}</p>
   </div>
+</div>
+
 </div>

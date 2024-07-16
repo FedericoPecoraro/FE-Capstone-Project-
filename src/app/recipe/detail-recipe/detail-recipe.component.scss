@@ -3,23 +3,23 @@
   margin: 0 auto;
   margin-top: 5rem;
   padding: 20px;
-  background-color: #fff;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 30px;
+  background: #212121;
+  box-shadow: 15px 15px 30px rgb(25, 25, 25), -15px -15px 30px rgb(60, 60, 60);
 
   h1 {
     font-size: 2.5rem;
-    color: #333;
+    color: #FEF8EB;
   }
 
   p {
     font-size: 1.2rem;
-    color: #666;
+    color: #FEF8EB;
   }
 
   h2 {
     font-size: 2rem;
-    color: #555;
+    color: #FEF8EB;
     margin-top: 20px;
   }
 
@@ -29,15 +29,9 @@
 
     li {
       font-size: 1rem;
-      color: #333;
+      color: #FEF8EB;
       margin: 5px 0;
     }
-  }
-
-  .creator {
-    margin-top: 20px;
-    font-size: 1.2rem;
-    color: #333;
   }
 }
 

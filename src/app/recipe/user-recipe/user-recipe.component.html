@@ -8,7 +8,7 @@
     <span class="visually-hidden">Previous</span>
   </button>
 
-  <ngb-carousel #carousel class="mb-5 settCar d-flex align-items-center justify-content-center" [interval]="0" [wrap]="true" [keyboard]="true" [showNavigationIndicators]="true">
+  <ngb-carousel #carousel class="mb-5 settCar d-flex align-items-center justify-content-center" [interval]="0" [wrap]="true" [keyboard]="true" [showNavigationIndicators]="false">
     <ng-template ngbSlide *ngFor="let group of createdRecipesGrouped">
       <div class="carousel-item d-flex justify-content-around">
         <div *ngFor="let recipe of group" class="card border-0 m-2" style="width: 30%;">
@@ -58,7 +58,7 @@
     <span class="visually-hidden">Previous</span>
   </button>
 
-  <ngb-carousel #favCarousel class="mb-5 settCar d-flex align-items-center justify-content-center" [interval]="0" [wrap]="true" [keyboard]="true" [showNavigationIndicators]="true">
+  <ngb-carousel #favCarousel class="mb-5 settCar d-flex align-items-center justify-content-center" [interval]="0" [wrap]="true" [keyboard]="true" [showNavigationIndicators]="false">
     <ng-template ngbSlide *ngFor="let group of favoriteRecipesGrouped">
       <div class="carousel-item d-flex justify-content-around">
         <div *ngFor="let recipe of group" class="card border-0 m-2" style="width: 30%;">

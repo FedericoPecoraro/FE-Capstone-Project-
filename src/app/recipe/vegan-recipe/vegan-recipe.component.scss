@@ -1,13 +1,15 @@
+h3 {
+  font-size: 35px;
+  color: #FEF8EB;
+}
+
 .card {
   position: relative;
   flex-direction: column;
-  min-width: 0;
   word-wrap: break-word;
-  background-color: #fff;
   background-clip: border-box;
-  border: 1px solid #00000020;
   border-radius: 0.8rem;
-}
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);}
 
 .card-smooth-caption,
 .card-img-overlay {
@@ -17,179 +19,76 @@
   bottom: 0;
 }
 
+//Nome ricetta
 .card-smooth-caption {
   background: linear-gradient(#00000000, #000000fa) #00000000;
-  padding: 2rem 1.5rem 1.5rem;
+  padding: 7px 1rem;
 }
-
+.card-title {
+  font-weight: bold;
+  color: #FEF8EB;
+}
 .card-footer {
   padding: 1.5rem;
   background-color: transparent;
   border-top: 0;
 }
 
-.card-cup,
-.card-img {
-  border-top-right-radius: 0.8rem;
-  border-top-left-radius: 0.8rem;
-}
-
-.card > hr {
-  margin-right: 0;
-  margin-left: 0;
-}
-
-.card-body {
-  flex: 1 1 auto;
-  min-height: 1px;
-  padding: 1rem 1.25rem;
-}
-
-.card-title {
-  line-height: 1.5;
-  margin-bottom: 0.5rem;
-  font-size: 20px;
-  font-family: Roboto;
-  font-weight: 500;
-  font-style: normal;
-}
-
-.badge-warning2,
-.text-muted,
-.read-more {
-  font-family: Roboto, sans-serif !important;
-}
-
-.card-subtitle,
-.card-text:last-child {
-  margin-bottom: 0;
-}
-
-.card-subtitle {
-  font-weight: 400;
-  margin-top: 0.2rem;
-}
-
-@media (min-width: 420px) {
-  .card-columns {
-    column-count: 2;
-    column-gap: 0.5rem;
-    orphans: 2;
-    widows: 2 !important;
-  }
-}
-
 @media (min-width: 576px) {
-  .card-columns .card {
+  .card {
     display: inline-block;
     width: 100%;
   }
-
-  .card-columns {
-    column-count: 3;
-    column-gap: 0.5rem;
-    orphans: 4;
-    widows: 4;
-  }
-
   .container {
     max-width: 98%;
   }
 }
 
-@media (min-width: 796px) {
-  .card-columns {
-    column-count: 3;
-    column-gap: 1.125rem;
-    orphans: 4;
-    widows: 4;
-  }
-}
-
 @media (min-width: 966px) {
-  .card-columns {
-    column-count: 3;
-    column-gap: 1.25rem;
-    orphans: 1;
-    widows: 1;
-  }
-
   .container {
     max-width: 80%;
   }
 }
 
-@media (min-width: 1200px) {
-  .card-columns {
-    column-count: 3;
-    column-gap: 1.25rem;
-    orphans: 1;
-    widows: 1;
-  }
-}
-
-p.card-text,
-.secondary {
+p.card-text {
   font-size: 16px;
-  font-weight: 400;
-  font-style: normal;
-  opacity: 0.75;
+  font-weight: bold;
   line-height: 25px;
   text-overflow: clip;
-  font-family: source sans pro;
-  display: -webkit-box;
-  -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  color: #333333;
 }
 
 .card.border-0 {
-  box-shadow: 0 1px 3px #0000001f, 0 1px 2px #0000003d !important;
-  background: hsl(220deg 14% 97%) !important;
+  box-shadow:
+  0 1px 3px rgba(0, 0, 0, 0.1),
+  0 4px 6px rgba(0, 0, 0, 0.1),
+  0 0 10px rgba(255, 255, 255, 0.249);
   text-align: left;
-  background-color: #fff !important;
+  background-color: #FEF8EB;
   position: relative;
-  margin-top: 12px !important;
-  border: 1px solid #eee !important;
-  transition: 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-  color: #000 !important;
-}
-
-.read-more {
-  border-radius: 5px !important;
-  letter-spacing: 0.5px !important;
-  box-shadow: 0 1px 3px #0000001a, 0 1px 2px #00000033,
-    inset 1px 1px 1px #ffffff99, inset -1px -1px 1px #0c0d120f,
-    -1px -1px 1px #ffffff99, -1px -1px 4px #ffffff99, -2px -2px 8px #ffffff99,
-    1px 1px 1px #0c0d120f, 1px 1px 4px #0c0d120f, 2px 2px 8px #0c0d120f !important;
-  background-color: hsl(228deg 14% 93%);
-  text-shadow: 0.25px 0.25px 0.25px hsl(233deg 5% 26% / 85%),
-    0.35px 0.35px 0.35px hsl(233deg 5% 26% / 85%), 0 -1.1px 0 rgb(12 13 18 / 8%),
-    0 1.2px 0 #fff !important;
-  color: hsl(233deg 5% 26%) !important;
-  font-weight: 300 !important;
-  border: none !important;
-  padding: 6px 12px;
-  text-transform: uppercase;
-  font-size: 11px;
+  margin-top: 12px;
+  border: 1px solid #FEF8EB;
 }
 
 span.badge.badge-light {
-  padding: 3.5px 5.5px;
+  padding: 7px;
   font-size: 12px;
-  background-image: linear-gradient(#c1353e, #c22b3a, #e42d49, #e32c3e);
-  box-shadow: 0 0 0.25px #e42d49,
-    -0.5px -0.75px 1px rgb(241 249 255 / 15%) inset,
-    -0.75px -1.5px 1.5px rgb(44 6 13 / 5%) inset, 0 -0.5px 0.75px 0.25px #c1353e,
-    0 0.5px 0.75px 0.25px #e32c3e, 0 -0.75px 2px -0.75px #c1353e,
-    0 0.75px 2px -0.75px #e32c3e, -0.5px -2px 3px 0.75px rgb(44 6 13 / 85%),
-    -1.75px -2.5px 2.5px -0.25px rgb(150 90 64 / 35%),
-    -0.75px -0.75px 0.625px 0.25px rgb(150 90 64 / 50%),
-    -0.85px -0.35px 0.85px 0 rgb(201 149 135 / 55%),
-    -1.25px -1.25px 1.65px 0 rgb(201 149 135 / 25%);
-  border-radius: 4px;
-  font-family: Roboto;
-  color: #fff;
+  border-radius: 50px;
+  background-image: linear-gradient(#8bc57a, #729e67, #7CAF6F, #69995B);
+  box-shadow: 0 0 0.25px #7CAF6F,
+    -0.5px -0.75px 1px rgba(105, 153, 91, 0.15) inset,
+    -0.75px -1.5px 1.5px rgba(84, 122, 72, 0.05) inset,
+    0 -0.5px 0.75px 0.25px #A8D899,
+    0 0.5px 0.75px 0.25px #69995B,
+    0 -0.75px 2px -0.75px #A8D899,
+    0 0.75px 2px -0.75px #69995B,
+    -0.5px -2px 3px 0.75px rgba(105, 153, 91, 0.85),
+    -1.75px -2.5px 2.5px -0.25px rgba(84, 122, 72, 0.35),
+    -0.75px -0.75px 0.625px 0.25px rgba(84, 122, 72, 0.50),
+    -0.85px -0.35px 0.85px 0 rgba(67, 98, 56, 0.55),
+    -1.25px -1.25px 1.65px 0 rgba(67, 98, 56, 0.25);
 }
 
 .card-img-overlay.three {
@@ -198,14 +97,18 @@ span.badge.badge-light {
   width: 100%;
   display: block;
   position: relative;
-  background-image: url(https://cdn.shopify.com/s/files/1/0758/3005/products/A3_DAY_ArtPrint_1200x.jpg?v=1605692196);
+  background-image: url(https://res.cloudinary.com/dwvgzj0h6/image/upload/v1721087492/a_placeholder_recipe_2_a40vqu.jpg);
   background-size: cover;
   border-radius: 12px 12px 2px 2px;
   background-position: 50% 50%;
 }
 
-//Open Recipe Button
+.card-btns {
+  display: flex;
+  justify-content: space-around;
+}
 
+//Open Recipe Button
 button {
   position: relative;
   display: inline-block;
@@ -215,7 +118,6 @@ button {
   vertical-align: middle;
   text-decoration: none;
   background: transparent;
-  padding: 0;
   font-size: inherit;
   font-family: inherit;
 }
@@ -232,7 +134,7 @@ button.learn-more .circle {
   margin: 0;
   width: 3rem;
   height: 3rem;
-  background: #282936;
+  background: #FBCB09;
   border-radius: 1.625rem;
 }
 
@@ -242,7 +144,6 @@ button.learn-more .circle .icon {
   top: 0;
   bottom: 0;
   margin: auto;
-  background: #fff;
 }
 
 button.learn-more .circle .icon.arrow {
@@ -260,20 +161,20 @@ button.learn-more .circle .icon.arrow::before {
   right: 0.0625rem;
   width: 0.625rem;
   height: 0.625rem;
-  border-top: 0.125rem solid #fff;
-  border-right: 0.125rem solid #fff;
+  border-top: 0.125rem solid #333333;
+  border-right: 0.125rem solid #333333;
   transform: rotate(45deg);
 }
 
 button.learn-more .button-text {
   transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
   position: absolute;
+  color: #333333;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
   padding: 0.75rem 0;
-  color: #282936;
   font-weight: 700;
   line-height: 1.6;
   text-align: center;
@@ -285,24 +186,26 @@ button:hover .circle {
 }
 
 button:hover .circle .icon.arrow {
-  background: #fff;
+  background: #333333;
   transform: translate(1rem, 0);
 }
 
-button:hover .button-text {
-  color: #fff;
+@media (max-width: 1280px) {
+  button.learn-more .button-text {
+    display: none;
+  }
+  button:hover .circle {
+    width: 40%;
+  }
 }
 
 
-
-
 //Like Button
-
 .ui-like {
-  --icon-size: 30px;
-  --icon-secondary-color: rgb(198, 198, 198);
-  --icon-hover-color: rgb(143, 143, 143);
-  --icon-primary-color: rgb(230, 26, 26);
+  --icon-size: 35px;
+  --icon-secondary-color: rgb(187, 186, 186);
+  --icon-hover-color: rgb(189, 156, 156);
+  --icon-primary-color: #DA4935;
   --icon-circle-border: 1px solid var(--icon-primary-color);
   --icon-circle-size: 40px;
   --icon-anmt-duration: 0.3s;
@@ -336,6 +239,7 @@ button:hover .button-text {
   -webkit-transform-origin: top;
   -ms-transform-origin: top;
   transform-origin: top;
+  margin-top: 8px;
 }
 
 .like::after {
@@ -374,7 +278,6 @@ button:hover .button-text {
 }
 
 /* actions */
-
 .ui-like:hover .like {
   fill: var(--icon-hover-color);
 }
@@ -498,9 +401,4 @@ button:hover .button-text {
     transform: scale(0.8);
     opacity: 0;
   }
-}
-
-.card-btns {
-  display: flex;
-  justify-content: space-between;
 }
